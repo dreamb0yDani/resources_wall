@@ -4,24 +4,26 @@
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
+const bcrypt = require('bcrypt')
 const express = require('express');
 const router = express.Router();
 
 
 module.exports = (db) => {
-  // router.get("/", (req, res) => {
-  //   db.query(`SELECT * FROM users;`)
-  //     .then(data => {
-  //       const users = data.rows;
-  //       res.json({ users });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
+  router.get("/", (req, res) => {
+
+    db.query(`SELECT * FROM users;`)
+      .then(data => {
+        const users = data.rows[0];
+        console.log(users)
+        res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+  });
 
   // register route for the user
   router.get("/register", (req, res) => {
