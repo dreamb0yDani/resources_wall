@@ -14,8 +14,8 @@ module.exports = (db) => {
     console.log(query);
     db.query(query)
       .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
+        const resources = data.rows;
+        res.json({ resources });
       })
       .catch(err => {
         res
@@ -28,16 +28,18 @@ module.exports = (db) => {
   // register route for the user
   router.get("/resources", (req, res) => {
     // all the resrouces form the database regardless of the user.
-    res.send("testing")
+    res.render("main_page")
   });
 
 
   router.post("/resources", (req, res) => {
     // postig the resource to the database.
+    res.redirect("main_page")
   });
 
-  router.get("/users/:id/resource", (req, res) => {
+  router.get("/users/:id/resources", (req, res) => {
     // user's resources
+    res.render("user_resrouces")
   });
 
   router.get("/resources/:id", (req, res) => {
