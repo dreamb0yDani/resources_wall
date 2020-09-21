@@ -1,0 +1,26 @@
+<body>
+  <header>
+  <%- include('partials/_header') %>
+  </header>
+
+  <h1 style="margin-bottom:50px;text-align:center">Resource Details</h1>
+
+    <section class="single-resource" style="margin-bottom:20px;text-align:center;list-style-type: none">
+
+      <div class="resource-content">
+
+        <div class="resource-title"><%= aResource.title %></div>
+        <div class="resource-url"><%= aResource.url %></div>
+        <div class="resource-description"><%= aResource.description %></div>
+
+      </div>
+
+      <form class="resource-reviews">
+        <textarea id="reivew-comment">This is a review comment ~</textarea>
+        <button id="like-resource" type="submit">LIKE</button>
+        <div id="review-rating">rating: __ out of 5 ~</div>
+        <button id="submit-review" type="submit">submit review</button>
+      </form>
+
+    </section>
+</body>

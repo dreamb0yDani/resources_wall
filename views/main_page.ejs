@@ -1,1 +1,24 @@
-<!-- main page to show the publicly available resources -->
+
+<body>
+  <header>
+  <%- include('partials/_header') %>
+  </header>
+
+  <h1 style="margin-bottom:50px;text-align:center">Welcome to the Resources-wall!</h1>
+
+  <ul class='all-resources'>
+    <% for(const resource of resourceList) { %>
+      <li style="margin-bottom:20px;text-align:center;list-style-type: none">
+        <div class='resource-title'><%= resource.title %></div>
+        <div class='resource-url'><%= resource.url %></div>
+        <div class='resource-description'><%= resource.description %></div>
+
+
+      </li>
+
+      <% } %>
+    </ul>
+
+</body>
+
+</html>
