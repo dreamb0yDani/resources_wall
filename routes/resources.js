@@ -38,7 +38,7 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const resources = data.rows;
-        console.log(resources);
+        //console.log(resources);
         const templateVars = {
           resourceList: resources
         }
@@ -63,13 +63,14 @@ module.exports = (db) => {
     const resourceCategory = req.body.category;
 
     //modularize into addResource function later
-    let query = `
+    const queryText = `
       INSERT INTO resources (title, url, description, user_id, category_id)
-      VALUES(${resourceTitle}, ${resourceUrl}, ${resourceDescription}, ${currentUser}, ${resourceCategory})
+      VALUES($1, $2, $3, $4, $5)
       RETURNING *
     `;
+    const queryValues = [resourceTitle, resourceUrl, resourceDescription, currentUser, resourceCategory];
 
-    db.query(query)
+    db.query(queryText, queryValues)
       .then(res => {
         //console.log(res.rows[0]);
         res.redirect("main_page")   //should we redirect to /resources/:id instead?
@@ -85,10 +86,10 @@ module.exports = (db) => {
   router.get("/users/:id/resources", (req, res) => {
     // myResource page!
 
-    //const currentUserID = req.session.user_id;
-    let query = `SELECT resources.* FROM resources JOIN users ON resources.user_id = users.id WHERE users.id = 2`;
+    const currentUserId = req.session.user_id;
+    const queryText = `SELECT resources.* FROM resources JOIN users ON resources.user_id = users.id WHERE users.id = $1`;
     //console.log(query);
-    db.query(query)
+    db.query(queryText, [currentUserId])
     .then(data => {
       const resources = data.rows;
       //console.log(resources);
@@ -111,10 +112,11 @@ module.exports = (db) => {
     // accessa speicific resources
     const resourcesId = req.params.id;
 
-    let query = `SELECT * FROM resources WHERE resources.id = ${resourcesId}`;
-    console.log(query);
+    let queryText = `SELECT * FROM resources WHERE resources.id = $1`;
+    const queryValues = [resourcesId];
+    //console.log(query);
 
-    db.query(query)
+    db.query(queryText, queryValues)
     .then(data => {
       const specificResource = data.rows[0];
 
@@ -134,25 +136,28 @@ module.exports = (db) => {
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
 
-
     const currentUser = req.session.user_id;
     const reviewComment = req.body.comment;
     const reviewLiked = req.body.liked; //=> event handler later
     const reviewRating = req.body.rating;
-    const resourcesId = req.params.id;
+    const resourceId = req.params.id;
 
     //modularize into addResource function later (->tweeter 'saveTweet' )
-    let query = `
+    const queryText = `
       INSERT INTO resources (title, url, description, user_id, category_id)
-      VALUES(${reviewComment}, ${reviewLiked}, ${reviewRating}, ${currentUser}, ${resourcesId})
-      RETURNING *
+      VALUES($1, $2, $3, $4, $5)
     `;
+    const queryValues = [reviewComment, reviewLiked, reviewRating, currentUser, resourceId]
 
-    db.query(query)
+    //authentication logic - may want to do it in AJAX instead of redirecting to
+    //prompt login page?
+    //if user is not logged-in- PROMOPT login ->
+
+    db.query(queryText, queryValues)
       .then(data => {
-        const review = data.rows[0]
+        //const review = data.rows[0]
         //console.log(res.rows[0]);
-        res.status(201).send(review); //?
+        res.status(201).send(); //?
         })
         //review to be appended to resource page -->to be appended by event handler
       .catch(err => {
