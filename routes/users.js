@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 
-module.exports = (db) => {
+module.exports = ({ addUser }) => {
   // router.get("/", (req, res) => {
 
   //   db.query(`SELECT * FROM users;`)
@@ -71,22 +71,16 @@ module.exports = (db) => {
 
   router.post("/register", (req, res) => {
 
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [name, email, password])
-      .then(data => {
-        const user = data.rows[0];
-        req.session.user_id = user[id];
-        res.redirect("main_page");
+    const user = req.body;
+    addUser(user)
+      .then(user => {
+        console.log(user.users.id)
+        // req.session.user_id = user[id];
+        res.redirect("/resources")
       })
-      .catch(err => {
-        if (err) {
-          res.sendStatus(403);
-        }
-      });
-  });
+
+  })
+
 
   router.get("/login", (req, res) => {
     res.render("login_form");
