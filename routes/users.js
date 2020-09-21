@@ -66,45 +66,84 @@ module.exports = (db) => {
 
   // register route for the user
   router.get("/register", (req, res) => {
-    // db.query(`SELECT resources.title FROM users JOIN resources ON resources.user_id = users.id WHERE users.name = 'Sandy';`)
-    //   .then(data => {
-    //     const users = data.rows;
-    //     console.log(users)
-    //     // res.json({ users });
-    //     const templateVars = { obj: users }
-    //     res.render("index", templateVars)
-    //     for (let user in users) {
-    //       console.log(users[user].name)
-    //     }
-    //   })
     res.render("registration_page")
   });
 
-
   router.post("/register", (req, res) => {
-    res.redirect("main_page")
+
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [name, email, password])
+      .then(data => {
+        const user = data.rows[0];
+        req.session.user_id = user[id];
+        res.redirect("main_page");
+      })
+      .catch(err => {
+        if (err) {
+        res.sendStatus(403);
+      }
+    });
   });
 
   router.get("/login", (req, res) => {
-    res.render("login_form")
+    res.render("login_form");
   });
 
   router.post("/login", (req, res) => {
-    res.redirect("main_page")
+
+    const email = req.body.email;
+    db.query(`SELECT * FROM users WHERE email = $1`, [email])
+    .then(data => {
+      const user = res.rows[0];
+      req.session.user_id = user[id];
+      res.redirect("main_page");
+    })
+    .catch(err => {
+      if (err) {
+        res.sendStatus(403);
+      }
+    });
   });
 
   router.post("/logout", (req, res) => {
-    res.redirect("main_page")
+    req.session = null;
+    res.redirect("main_page");
   });
 
   router.get("/users/:id", (res, req) => {
     // take you to the user profile
-    res.render("user_profile");
+    db.query(`SELECT * FROM users WHERE id = $1`, [req.session.user_id])
+    .then(data => {
+      const user = data.rows[0];
+      const templateVars = { user: user }
+      res.render("user_profile", templateVars);
+    })
+    .catch(err => {
+      if (err) {
+        res.sendStatus(403);
+      }
+    });
   });
 
   router.post("/users/:id", (res, req) => {
-    // take you to the user profile to update the infromation
-    res.redirect(user_profile)
+    // submits information to the db to update user info
+    const user = req.session.user_id
+    if (req.body.name) {
+      db.query(`UPDATE users SET name = $2 WHERE id = $1 RETURNING *`, [user, req.body.name])
+      .then(data => data.rows);
+      res.redirect("user_profile");
+    } else if (req.body.email) {
+      db.query(`UPDATE users SET email = $2 WHERE id = $1 RETURNING *`, [user, req.body.email])
+      .then(data => data.rows);
+      res.redirect("user_profile");
+    } else if (req.body.password) {
+      db.query(`UPDATE users SET password = $2 WHERE id = $1 RETURNING *`, [user, req.body.password])
+      .then(data => data.rows);
+      res.redirect("user_profile");
+    }
   });
 
 

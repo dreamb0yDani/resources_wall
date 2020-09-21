@@ -110,9 +110,7 @@ module.exports = (db) => {
 
   router.get("/resources/:id", (req, res) => {
     // accessa speicific resources
-<<<<<<< HEAD
     res.render("resource")
-=======
     const resourcesId = req.params.id;
 
     let queryText = `SELECT * FROM resources WHERE resources.id = $1`;
@@ -133,14 +131,11 @@ module.exports = (db) => {
         .status(500)
         .json({ error: err.message });
     });
->>>>>>> 2b947a303a21f1369d103bfee59ce15fffe5baaa
   });
 
   router.post("/resources/:id/reviews", (res, req) => {
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
-<<<<<<< HEAD
-=======
 
     const currentUser = req.session.user_id;
     const reviewComment = req.body.comment;
@@ -172,7 +167,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
 
->>>>>>> 2b947a303a21f1369d103bfee59ce15fffe5baaa
   });
 
   return router;
