@@ -23,7 +23,7 @@ $(document).ready(() => {
   console.log('Ready')
   // $(() => {
   // $.ajax({
-  //   method: "GET",
+  //   method: "GET",  <script type="text/javascript" src="/scripts/app.js"></script>
   //   url: "/r",
   //   dataType: "JSON"
   // }).done((users) => {
