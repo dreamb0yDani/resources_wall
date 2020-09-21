@@ -27,10 +27,29 @@ module.exports = (db) => {
 
   /**
    * --Queries --
-   * Add User
-   * getUserByID
-   * getUserByEmail
-   * updateUserProfile
+   * const addUser = function(name, email, password) {
+   *  return db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [name, email, password]).then(res => res.rows);
+   * }
+   *
+   * const getUserByID = function(id) {
+   *  return db.query(`SELECT * FROM users WHERE id = $1`, [id]).then(res => res.rows);
+   * }
+   *
+   * const getUserByEmail = function(email) {
+   *  return db.query(`SELECT * FROM users WHERE email = $1`, [email]).then(res => res.rows);
+   * }
+   *
+   * const updateUserName = function(email, name) {
+   *  return db.query(`UPDATE users SET name = $2 WHERE email = $1 RETURNING *`, [email, name]).then(res => res.rows);
+   * }
+   *
+   * const updateUserEmail = function(id, email) {
+   *  return db.query(`UPDATE users SET email = $2 WHERE id = $1 RETURNING *`, [id, email]).then(res => res.rows);
+   * }
+   *
+   * const updateUserPassword = function(email, password) {
+   *  return db.query(`UPDATE users SET password = $2 WHERE email = $1 RETURNING *`, [email, password]).then(res => res.rows);
+   * }
    *
    * getAllResources
    * getUserResource
