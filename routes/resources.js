@@ -110,6 +110,7 @@ module.exports = (db) => {
 
   router.get("/resources/:id", (req, res) => {
     // accessa speicific resources
+    res.render("resource")
     const resourcesId = req.params.id;
 
     let queryText = `SELECT * FROM resources WHERE resources.id = $1`;
