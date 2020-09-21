@@ -33,7 +33,7 @@ $(document).ready(() => {
   // });;
   // });
   const loadContents = () => {
-    $.ajax("/r", { method: "GET", dataType: "JSON" })
+    $.ajax("/api/resources", { method: "GET", dataType: "JSON" })
       .then(dataReceived => {
         // console.log(dataReceived[0])
         renderContent(dataReceived)

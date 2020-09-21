@@ -10,7 +10,7 @@ const router = express.Router();
 
 module.exports = (db) => {
 
-  router.get("/r", (req, res) => {
+  router.get("/api/resources", (req, res) => {
     let query = `SELECT * FROM resources`;
     console.log(query);
     db.query(query)
@@ -110,9 +110,6 @@ module.exports = (db) => {
 
   router.get("/resources/:id", (req, res) => {
     // accessa speicific resources
-<<<<<<< HEAD
-    res.render("resource")
-=======
     const resourcesId = req.params.id;
 
     let queryText = `SELECT * FROM resources WHERE resources.id = $1`;
@@ -120,27 +117,24 @@ module.exports = (db) => {
     //console.log(query);
 
     db.query(queryText, queryValues)
-    .then(data => {
-      const specificResource = data.rows[0];
+      .then(data => {
+        const specificResource = data.rows[0];
 
-      const templateVars = {
-        aResource: specificResource
-      }
-      res.render('resource', templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
->>>>>>> 2b947a303a21f1369d103bfee59ce15fffe5baaa
+        const templateVars = {
+          aResource: specificResource
+        }
+        res.render('resource', templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.post("/resources/:id/reviews", (res, req) => {
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
-<<<<<<< HEAD
-=======
 
     const currentUser = req.session.user_id;
     const reviewComment = req.body.comment;
@@ -164,15 +158,14 @@ module.exports = (db) => {
         //const review = data.rows[0]
         //console.log(res.rows[0]);
         res.status(201).send(); //?
-        })
-        //review to be appended to resource page -->to be appended by event handler
+      })
+      //review to be appended to resource page -->to be appended by event handler
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
 
->>>>>>> 2b947a303a21f1369d103bfee59ce15fffe5baaa
   });
 
   return router;

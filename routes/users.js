@@ -65,7 +65,7 @@ module.exports = (db) => {
    */
 
   // register route for the user
-  router.get("/register", (req, res) => {
+  router.get("/api/users", (req, res) => {
     // db.query(`SELECT resources.title FROM users JOIN resources ON resources.user_id = users.id WHERE users.name = 'Sandy';`)
     //   .then(data => {
     //     const users = data.rows;
@@ -77,12 +77,16 @@ module.exports = (db) => {
     //       console.log(users[user].name)
     //     }
     //   })
-    res.render("registration_page")
+    // res.render("registration_page")
   });
+
+  router.get("/register", (req, res) => {
+    res.render("registration_page")
+  })
 
 
   router.post("/register", (req, res) => {
-    res.redirect("main_page")
+    res.redirect("/resources")
   });
 
   router.get("/login", (req, res) => {
