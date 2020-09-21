@@ -9,7 +9,8 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
+
+  router.get("/r", (req, res) => {
     let query = `SELECT * FROM resources`;
     console.log(query);
     db.query(query)
@@ -44,12 +45,12 @@ module.exports = (db) => {
 
   router.get("/resources/:id", (req, res) => {
     // accessa speicific resources
+    res.render("resource")
   });
 
   router.post("/resources/:id/reviews", (res, req) => {
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
-
   });
 
   return router;
