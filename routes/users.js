@@ -9,8 +9,8 @@ const express = require('express');
 const router = express.Router();
 
 
-module.exports = ({ addUser }) => {
-  // router.get("/", (req, res) => {
+module.exports = ({ addUser, getUserByEmail }) => {
+  // router.get("/api/users", (req, res) => {
 
   //   db.query(`SELECT * FROM users;`)
   //     .then(data => {
@@ -27,18 +27,10 @@ module.exports = ({ addUser }) => {
 
   /**
    * --Queries --
-   * const addUser = function(name, email, password) {
-   *  return db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [name, email, password]).then(res => res.rows);
-   * }
-   *
    * const getUserByID = function(id) {
    *  return db.query(`SELECT * FROM users WHERE id = $1`, [id]).then(res => res.rows);
    * }
-   *
-   * const getUserByEmail = function(email) {
-   *  return db.query(`SELECT * FROM users WHERE email = $1`, [email]).then(res => res.rows);
-   * }
-   *
+
    * const updateUserName = function(email, name) {
    *  return db.query(`UPDATE users SET name = $2 WHERE email = $1 RETURNING *`, [email, name]).then(res => res.rows);
    * }
@@ -72,13 +64,13 @@ module.exports = ({ addUser }) => {
   router.post("/register", (req, res) => {
 
     const user = req.body;
+    user.password = bcrypt.hashSync(req.body.password, 10)
+
     addUser(user)
       .then(user => {
-        console.log(user.users.id)
-        // req.session.user_id = user[id];
-        res.redirect("/resources")
+        req.session.user_id = user.id;
       })
-
+    return res.redirect("/resources")
   })
 
 
@@ -88,23 +80,17 @@ module.exports = ({ addUser }) => {
 
   router.post("/login", (req, res) => {
 
-    const email = req.body.email;
-    db.query(`SELECT * FROM users WHERE email = $1`, [email])
-      .then(data => {
-        const user = res.rows[0];
-        req.session.user_id = user[id];
-        res.redirect("main_page");
+    const { email, password } = req.body;
+    getUserByEmail(email)
+      .then(user => {
+        req.session.user_id = user.id;
+        res.redirect("/resources");
       })
-      .catch(err => {
-        if (err) {
-          res.sendStatus(403);
-        }
-      });
-  });
+  })
 
   router.post("/logout", (req, res) => {
     req.session = null;
-    res.redirect("main_page");
+    res.redirect("/resources");
   });
 
   router.get("/users/:id", (res, req) => {
