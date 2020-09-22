@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 
-module.exports = ({ addUser }) => {
+module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateUserEmail, updateUserPassword}) => {
   // router.get("/", (req, res) => {
 
   //   db.query(`SELECT * FROM users;`)
@@ -72,10 +72,12 @@ module.exports = ({ addUser }) => {
   router.post("/register", (req, res) => {
 
     const user = req.body;
-    addUser(user)
-      .then(user => {
-        console.log(user.users.id)
-        // req.session.user_id = user[id];
+    //console.log("inside POST /register route; user = req.body : ", req.body);
+
+     addUser(user)
+      .then(newUser => {
+        console.log('inside THEN user id  is:', newUser.id)
+        req.session.user_id = newUser.id;
         res.redirect("/resources")
       })
 
@@ -89,54 +91,81 @@ module.exports = ({ addUser }) => {
   router.post("/login", (req, res) => {
 
     const email = req.body.email;
-    db.query(`SELECT * FROM users WHERE email = $1`, [email])
-      .then(data => {
-        const user = res.rows[0];
-        req.session.user_id = user[id];
-        res.redirect("main_page");
+    getUserByEmail(email)
+      .then(user => {
+        req.session.user_id = user.id;
+        res.redirect("/resources");
       })
       .catch(err => {
         if (err) {
-          res.sendStatus(403);
+          res.status(403).json({ error: err.message });
         }
       });
   });
 
   router.post("/logout", (req, res) => {
     req.session = null;
-    res.redirect("main_page");
+    res.redirect("resources");
   });
 
-  router.get("/users/:id", (res, req) => {
+
+
+
+  router.get("/users/:id", (req, res) => {
     // take you to the user profile
-    db.query(`SELECT * FROM users WHERE id = $1`, [req.session.user_id])
-      .then(data => {
-        const user = data.rows[0];
-        const templateVars = { user: user }
-        res.render("user_profile", templateVars);
-      })
-      .catch(err => {
-        if (err) {
-          res.sendStatus(403);
-        }
-      });
-  });
 
-  router.post("/users/:id", (res, req) => {
+    req.session.user_id = req.params.id;
+
+    console.log(req.session);
+    getUserByID(req.session.user_id)
+      .then(user => {
+//
+      const templateVars = { user: user }
+        return res.render("user_profile", templateVars);
+     })
+     .catch(err => res.send(err.message));
+    });
+
+
+  router.post("/users/:id", (req, res) => {
     // submits information to the db to update user info
     const user = req.session.user_id
+
     if (req.body.name) {
-      db.query(`UPDATE users SET name = $2 WHERE id = $1 RETURNING *`, [user, req.body.name])
-        .then(data => data.rows);
-      res.redirect("user_profile");
+      updateUserName([user, req.body.name])
+        .then(data => {
+          res.send('update user name SUCCESS')
+          res.redirect("user_profile");
+        })
+        .catch(err => {
+          if (err) {
+            res.status(403).json({ error: err.message });
+          }
+        });
+
     } else if (req.body.email) {
-      db.query(`UPDATE users SET email = $2 WHERE id = $1 RETURNING *`, [user, req.body.email])
-        .then(data => data.rows);
-      res.redirect("user_profile");
+      updateUserEmail([user, req.body.email])
+        .then(data => {
+          res.send('update user email SUCCESS')
+          res.redirect("user_profile");
+        })
+        .catch(err => {
+          if (err) {
+            res.status(403).json({ error: err.message });
+          }
+        });
+
     } else if (req.body.password) {
-      db.query(`UPDATE users SET password = $2 WHERE id = $1 RETURNING *`, [user, req.body.password])
-        .then(data => data.rows);
-      res.redirect("user_profile");
+      updateUserPassword([user, req.body.password])
+        .then(data => {
+          res.send('update user password SUCCESS')
+          res.redirect("user_profile");
+        })
+        .catch(err => {
+          if (err) {
+            res.status(403).json({ error: err.message });
+          }
+        });;
     }
   });
 

@@ -12,7 +12,7 @@ module.exports = (db) => {
 
   router.get("/api/resources", (req, res) => {
     let query = `SELECT * FROM resources`;
-    console.log(query);
+    //console.log(query);
     db.query(query)
       .then(data => {
         const resources = data.rows;
