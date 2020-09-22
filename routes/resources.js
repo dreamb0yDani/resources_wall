@@ -86,23 +86,27 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       .then(data => {
         const resource = data[0];
         const templateVars = {
-          aResource: resource
+          aResource: resource,
+          user: req.session.user_id,
+          id: req.params.id
         }
         res.render('resource', templateVars);
       })
       .catch(e => res.send(e));
   });
 
-  router.post("/resources/:id/reviews", (res, req) => {
+  router.post("/resources/:id/reviews", (req, res) => {
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
 
     const review = req.body; // .comment, .liked, .rating
+    console.log(review)
     const currentUser = req.session.user_id;
     const resourceID = req.params.id;
 
     addResourceReview(review, currentUser, resourceID)
       .then(res => {
+        console.log(res)
         res.redirect("/resources/:id")
       })
       .catch(e => res.send(e));

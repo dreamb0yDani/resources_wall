@@ -30,6 +30,15 @@ module.exports = ({ addUser,
   //     })
   // });
 
+  // const userValidation = email => {
+  //   getUserByEmail(email)
+  //     .then(user => {
+  //       if (user) {
+  //         return res.send("Error,email already exist")
+  //       }
+  //     })
+  // }
+
   // register route for the user
   router.get("/register", (req, res) => {
 
@@ -39,8 +48,10 @@ module.exports = ({ addUser,
   router.post("/register", (req, res) => {
 
     const user = req.body;
-    // user.password = bcrypt.hashSync(req.body.password, 10)
+    user.password = bcrypt.hashSync(req.body.password, 10)
 
+    // userValidation(req.body.email)
+    //   .then(res => ))
     addUser(user)
       .then(user => {
         console.log(user)

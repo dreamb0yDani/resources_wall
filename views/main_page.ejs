@@ -2,6 +2,13 @@
 <%- include('partials/_header') %>
 
 <body>
+  <% if (user) { %>
+  <form action="/resources" method="POST">
+    <label for="new_content">What are you humming about?</label>
+    <textarea name="text" id="new-content"></textarea>
+  </form>
+  <% } %>
+
   <main class="main-container">
     <section id="content-container">
       <% for(const resource of resourceList) { %>
