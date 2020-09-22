@@ -2,22 +2,17 @@
 <%- include('partials/_header') %>
 
 <body>
-  <!-- <main class="main-container">
+  <main class="main-container">
     <section id="content-container">
-
-    </section> -->
-
-    <ul class='all-resources'>
       <% for(const resource of resourceList) { %>
-      <li style="margin-bottom:20px;text-align:center;list-style-type: none">
-        <div class='resource-title'><%= resource.title %></div>
-        <div class='resource-url'><%= resource.url %></div>
-        <div class='resource-description'><%= resource.description %></div>
-
-
-      </li>
-
+      <article class="content">
+        <header>
+          <h2><%= resource.title %></h2>
+          <embed src=<%= resource.url %> type="text/html">
+          <p><%= resource.description %></p>
+        </header>
+      </article>
       <% } %>
-    </ul>
+    </section>
   </main>
 </body>
