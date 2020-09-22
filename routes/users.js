@@ -9,8 +9,8 @@ const express = require('express');
 const router = express.Router();
 
 
-module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateUserEmail, updateUserPassword}) => {
-  // router.get("/", (req, res) => {
+module.exports = ({ addUser, getUserByEmail }) => {
+  // router.get("/api/users", (req, res) => {
 
   //   db.query(`SELECT * FROM users;`)
   //     .then(data => {
@@ -27,18 +27,10 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
 
   /**
    * --Queries --
-   * const addUser = function(name, email, password) {
-   *  return db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [name, email, password]).then(res => res.rows);
-   * }
-   *
    * const getUserByID = function(id) {
    *  return db.query(`SELECT * FROM users WHERE id = $1`, [id]).then(res => res.rows);
    * }
-   *
-   * const getUserByEmail = function(email) {
-   *  return db.query(`SELECT * FROM users WHERE email = $1`, [email]).then(res => res.rows);
-   * }
-   *
+
    * const updateUserName = function(email, name) {
    *  return db.query(`UPDATE users SET name = $2 WHERE email = $1 RETURNING *`, [email, name]).then(res => res.rows);
    * }
@@ -72,15 +64,13 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
   router.post("/register", (req, res) => {
 
     const user = req.body;
-    //console.log("inside POST /register route; user = req.body : ", req.body);
+    user.password = bcrypt.hashSync(req.body.password, 10)
 
-     addUser(user)
-      .then(newUser => {
-        console.log('inside THEN user id  is:', newUser.id)
-        req.session.user_id = newUser.id;
-        res.redirect("/resources")
+    addUser(user)
+      .then(user => {
+        req.session.user_id = user.id;
       })
-
+    return res.redirect("/resources")
   })
 
 
@@ -96,16 +86,11 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
         req.session.user_id = user.id;
         res.redirect("/resources");
       })
-      .catch(err => {
-        if (err) {
-          res.status(403).json({ error: err.message });
-        }
-      });
-  });
+  })
 
   router.post("/logout", (req, res) => {
     req.session = null;
-    res.redirect("resources");
+    res.redirect("/resources");
   });
 
 
@@ -119,12 +104,12 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
     console.log('inside get /users/:id, the req.session is ---', req.session);
     getUserByID(req.session.user_id)
       .then(user => {
-//
-      const templateVars = { user: user }
+        //
+        const templateVars = { user: user }
         return res.render("user_profile", templateVars);
-     })
-     .catch(err => res.send(err.message));
-    });
+      })
+      .catch(err => res.send(err.message));
+  });
 
 
   router.post("/users/:id", (req, res) => {
