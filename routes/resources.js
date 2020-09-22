@@ -34,8 +34,10 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       .then(data => {
         const resources = data;
         const templateVars = {
-          resourceList: resources
+          resourceList: resources,
+          user: req.session.user_id
         };
+        console.log(templateVars.user)
         res.render("main_page", templateVars)
       })
       .catch(e => res.send(e));
@@ -56,8 +58,8 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
 
   router.get("/users/:id/resources", (req, res) => {
-  //   // myResource page!
-  // I don't think we need the id here (/users/:id/resources)? /users/resources should just return the result of the resource query that is performed using the user_id cookie?
+    //   // myResource page!
+    // I don't think we need the id here (/users/:id/resources)? /users/resources should just return the result of the resource query that is performed using the user_id cookie?
 
     // const currentUser = req.session.user_id;
     const currentUser = req.params.id;
@@ -67,7 +69,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
         const resources = data;
         const templateVars = {
           resourceList: resources,
-          // user: currentUser
+          user: req.session.user_id
         };
         res.render("user_resources", templateVars);
       })

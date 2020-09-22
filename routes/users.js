@@ -9,7 +9,12 @@ const express = require('express');
 const router = express.Router();
 
 
-module.exports = ({ addUser, getUserByEmail }) => {
+module.exports = ({ addUser,
+  getUserByEmail,
+  getUserByID,
+  updateUserName,
+  updateUserEmail,
+  updateUserPassword }) => {
   // router.get("/api/users", (req, res) => {
 
   //   db.query(`SELECT * FROM users;`)
@@ -25,57 +30,28 @@ module.exports = ({ addUser, getUserByEmail }) => {
   //     })
   // });
 
-  /**
-   * --Queries --
-   * const getUserByID = function(id) {
-   *  return db.query(`SELECT * FROM users WHERE id = $1`, [id]).then(res => res.rows);
-   * }
-
-   * const updateUserName = function(email, name) {
-   *  return db.query(`UPDATE users SET name = $2 WHERE email = $1 RETURNING *`, [email, name]).then(res => res.rows);
-   * }
-   *
-   * const updateUserEmail = function(id, email) {
-   *  return db.query(`UPDATE users SET email = $2 WHERE id = $1 RETURNING *`, [id, email]).then(res => res.rows);
-   * }
-   *
-   * const updateUserPassword = function(email, password) {
-   *  return db.query(`UPDATE users SET password = $2 WHERE email = $1 RETURNING *`, [email, password]).then(res => res.rows);
-   * }
-   *
-   * getAllResources
-   * getUserResource
-   * addResource
-   *
-   * addReview
-   * getUserReview
-   *
-   * -- Function--
-   * login
-   * register
-   *
-   */
-
   // register route for the user
   router.get("/register", (req, res) => {
-    res.render("registration_page")
+
+    req.session.user_id ? res.redirect('/resources') : res.render('registration_page', { user: req.session.user_id });
   });
 
   router.post("/register", (req, res) => {
 
     const user = req.body;
-    user.password = bcrypt.hashSync(req.body.password, 10)
+    // user.password = bcrypt.hashSync(req.body.password, 10)
 
     addUser(user)
       .then(user => {
+        console.log(user)
         req.session.user_id = user.id;
+        res.redirect("/resources")
       })
-    return res.redirect("/resources")
   })
 
 
   router.get("/login", (req, res) => {
-    res.render("login_form");
+    req.session.user_id ? res.redirect('/resources') : res.render('login_form', { user: req.session.user_id });
   });
 
   router.post("/login", (req, res) => {
@@ -98,10 +74,8 @@ module.exports = ({ addUser, getUserByEmail }) => {
 
   router.get("/users/:id", (req, res) => {
     // take you to the user profile
-
     req.session.user_id = req.params.id;
 
-    console.log('inside get /users/:id, the req.session is ---', req.session);
     getUserByID(req.session.user_id)
       .then(user => {
         //
@@ -155,7 +129,7 @@ module.exports = ({ addUser, getUserByEmail }) => {
           }
         });;
     }
-    res.render("../views/user_profile")
+    res.render("../views/user_profile", { user: req.session.user_id })
 
   });
 
