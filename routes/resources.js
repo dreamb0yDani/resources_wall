@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview }) => {
 
   // router.get("/api/resources", (req, res) => {
   //   let query = `SELECT * FROM resources`;
@@ -32,12 +32,13 @@ module.exports = ({ getAllResources, addResource, myResources }) => {
     // all the resrouces form the database regardless of the user.
     getAllResources()
       .then(data => {
-        const resources = data.rows;
+        const resources = data;
         const templateVars = {
           resourceList: resources
         };
         res.render("main_page", templateVars)
       })
+      .catch(e => res.send(e));
   });
 
 
@@ -50,87 +51,61 @@ module.exports = ({ getAllResources, addResource, myResources }) => {
       .then(res => {
         res.redirect("/resources")
       })
+      .catch(e => res.send(e));
   });
 
 
   router.get("/users/:id/resources", (req, res) => {
   //   // myResource page!
+  // I don't think we need the id here (/users/:id/resources)? /users/resources should just return the result of the resource query that is performed using the user_id cookie?
 
-    const currentUser = req.session.user_id;
+    // const currentUser = req.session.user_id;
+    const currentUser = req.params.id;
 
     myResources(currentUser)
       .then(data => {
-        const resources = data.rows;
+        const resources = data;
         const templateVars = {
           resourceList: resources,
-          user: currentUser
+          // user: currentUser
         };
         res.render("user_resources", templateVars);
       })
+      .catch(e => res.send(e));
   });
 
 
 
-  // router.get("/resources/:id", (req, res) => {
-  //   // accessa speicific resources
-  //   res.render("resource")
-  //   const resourcesId = req.params.id;
+  router.get("/resources/:id", (req, res) => {
+    // accessa specific resources
+    const resourceID = req.params.id;
 
-  //   let queryText = `SELECT * FROM resources WHERE resources.id = $1`;
-  //   const queryValues = [resourcesId];
-  //   //console.log(query);
+    getResourceByID(resourceID)
+      .then(data => {
+        const resource = data[0];
+        const templateVars = {
+          aResource: resource
+        }
+        res.render('resource', templateVars);
+      })
+      .catch(e => res.send(e));
+  });
 
-  //   db.query(queryText, queryValues)
-  //     .then(data => {
-  //       const specificResource = data.rows[0];
+  router.post("/resources/:id/reviews", (res, req) => {
+    // posting the reviews for a specific resource
+    // form with textarea, button and rating.
 
-  //       const templateVars = {
-  //         aResource: specificResource
-  //       }
-  //       res.render('resource', templateVars);
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
+    const review = req.body; // .comment, .liked, .rating
+    const currentUser = req.session.user_id;
+    const resourceID = req.params.id;
 
-  // router.post("/resources/:id/reviews", (res, req) => {
-  //   // posting the reviews for a specific resource
-  //   // form with textarea, button and rating.
+    addResourceReview(review, currentUser, resourceID)
+      .then(res => {
+        res.redirect("/resources/:id")
+      })
+      .catch(e => res.send(e));
 
-  //   const currentUser = req.session.user_id;
-  //   const reviewComment = req.body.comment;
-  //   const reviewLiked = req.body.liked; //=> event handler later
-  //   const reviewRating = req.body.rating;
-  //   const resourceId = req.params.id;
-
-  //   //modularize into addResource function later (->tweeter 'saveTweet' )
-  //   const queryText = `
-  //     INSERT INTO resources (title, url, description, user_id, category_id)
-  //     VALUES($1, $2, $3, $4, $5)
-  //   `;
-  //   const queryValues = [reviewComment, reviewLiked, reviewRating, currentUser, resourceId]
-
-  //   //authentication logic - may want to do it in AJAX instead of redirecting to
-  //   //prompt login page?
-  //   //if user is not logged-in- PROMOPT login ->
-
-  //   db.query(queryText, queryValues)
-  //     .then(data => {
-  //       //const review = data.rows[0]
-  //       //console.log(res.rows[0]);
-  //       res.status(201).send(); //?
-  //     })
-  //     //review to be appended to resource page -->to be appended by event handler
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-
-  // });
+  });
 
   return router;
 };

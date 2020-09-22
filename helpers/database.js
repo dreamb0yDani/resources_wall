@@ -1,5 +1,7 @@
 module.exports = db => {
-
+//------------------------------------------------------------------------------
+//  User Queries
+//------------------------------------------------------------------------------
   const addUser = function ({ name, email, password }) {
 
     const queryStr = {
@@ -10,46 +12,6 @@ module.exports = db => {
     .query(queryStr)
     .then(res => {
       return res.rows[0]
-    })
-  }
-
-  const getAllResources = function() {
-    let queryStr = {
-      text: `SELECT * FROM resources;`
-    }
-
-    return db
-    .query(queryStr)
-    .then(res => {
-      return res.rows
-    })
-  }
-
-  const addResource = function (resource, currentUser) {
-    const queryStr = {
-      text: `INSERT INTO resources (title, url, description, user_id, category_id)
-      VALUES($1, $2, $3, $4, $5)
-      RETURNING *;`,
-      values: [resource.title, resource.url, resource.description, currentUser, resource.category]
-    }
-
-    return db
-    .query(queryStr)
-    .then (res => {
-      return res.rows[0]
-    })
-  }
-
-  const myResources = function (currentUser) {
-    const queryStr = {
-      text: `SELECT resources.* FROM resources JOIN users ON resources.user_id = users.id WHERE users.id = $1;`,
-      values: [currentUser]
-    }
-
-    return db
-    .query(queryStr)
-    .then (res => {
-      return res.rows
     })
   }
 
@@ -80,6 +42,73 @@ module.exports = db => {
     return db.query(`UPDATE users SET password = $2 WHERE id = $1 RETURNING *`, [id, password])
       .then(res => res.rows)[0];
    }
+//------------------------------------------------------------------------------
+//  Resource Queries
+//------------------------------------------------------------------------------
+   const getAllResources = function() {
+    return db.query(`SELECT * FROM resources;`)
+      .then(res => res.rows);
+  }
+
+  const myResources = function(currentUser) {
+    const queryStr = {
+      text: `SELECT resources.* FROM resources JOIN users ON resources.user_id = users.id WHERE users.id = $1;`,
+      values: [currentUser]
+    }
+
+    return db
+    .query(queryStr)
+    .then (res => {
+      return res.rows
+    })
+  }
+
+  const getResourceByID = function(id) {
+    const queryStr = {
+      text: `SELECT * FROM resources WHERE resources.id = $1`,
+      values: [id]
+    }
+
+    return db
+    .query(queryStr)
+    .then (res => {
+      return res.rows
+    })
+  }
+
+  const addResource = function(resource, currentUser) {
+    const queryStr = {
+      text: `INSERT INTO resources (title, url, description, user_id, category_id)
+      VALUES($1, $2, $3, $4, $5)
+      RETURNING *;`,
+      values: [resource.title, resource.url, resource.description, currentUser, resource.category]
+    }
+
+    return db
+    .query(queryStr)
+    .then (res => {
+      return res.rows[0]
+    })
+  }
+
+
+
+  const addResourceReview = function(review, currentUser, resourceID) {
+
+    const queryStr = {
+      text: `INSERT INTO reviews (comment, liked, rating, user_id, resource_id)
+      VALUES($1, $2, $3, $4, $5)`,
+      values: [review.comment, review.liked, review.rating, currentUser, resourceID]
+    }
+
+    return db
+    .query(queryStr)
+    .then (res => {
+      return res.rows[0]
+    })
+
+  }
+
 
 
   return {
@@ -91,6 +120,8 @@ module.exports = db => {
     updateUserPassword,
     getAllResources,
     addResource,
-    myResources
+    myResources,
+    getResourceByID,
+    addResourceReview
   }
 }
