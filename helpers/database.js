@@ -56,7 +56,7 @@ module.exports = db => {
   const getUserByID = function(id) {
     return db.query(`SELECT * FROM users WHERE id = $1`, [id])
       .then(res => {
-        console.log('in getUserByID; result is: ', res.rows[0])
+        //console.log('in getUserByID; result is: ', res.rows[0])
         return res.rows[0];
       });
     }
@@ -68,17 +68,26 @@ module.exports = db => {
 
   const updateUserName = function(id, name) {
    return db.query(`UPDATE users SET name = $2 WHERE id = $1 RETURNING *`, [id, name])
-    .then(res => res.rows[0]);
+    .then(res => {
+      //console.log(res.rows[0]);
+      return res.rows[0]
+    });
    }
 
    const updateUserEmail = function(id, email) {
     return db.query(`UPDATE users SET email = $2 WHERE id = $1 RETURNING *`, [id, email])
-      .then(res => res.rows[0]);
+      .then(res => {
+        //console.log(res.rows[0]);
+        return res.rows[0]
+      });
    }
 
    const updateUserPassword = function(id, password) {
     return db.query(`UPDATE users SET password = $2 WHERE id = $1 RETURNING *`, [id, password])
-      .then(res => res.rows)[0];
+      .then(res => {
+        //console.log(res.rows[0]);
+        return res.rows[0]
+      });
    }
 
 

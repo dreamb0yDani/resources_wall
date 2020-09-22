@@ -116,7 +116,7 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
 
     req.session.user_id = req.params.id;
 
-    console.log(req.session);
+    console.log('inside get /users/:id, the req.session is ---', req.session);
     getUserByID(req.session.user_id)
       .then(user => {
 //
@@ -130,12 +130,13 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
   router.post("/users/:id", (req, res) => {
     // submits information to the db to update user info
     const user = req.session.user_id
-
+    console.log('current user ID is ---', user);
     if (req.body.name) {
-      updateUserName([user, req.body.name])
+      updateUserName(user, req.body.name)
         .then(data => {
-          res.send('update user name SUCCESS')
-          res.redirect("user_profile");
+          console.log('UPDATE USER NAME SUCCESS')
+          console.log(data);
+
         })
         .catch(err => {
           if (err) {
@@ -143,11 +144,12 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
           }
         });
 
-    } else if (req.body.email) {
-      updateUserEmail([user, req.body.email])
+    } if (req.body.email) {
+      updateUserEmail(user, req.body.email)
         .then(data => {
-          res.send('update user email SUCCESS')
-          res.redirect("user_profile");
+          console.log('UPDATE EMAIL SUCCESS')
+          console.log(data);
+          ;
         })
         .catch(err => {
           if (err) {
@@ -155,11 +157,12 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
           }
         });
 
-    } else if (req.body.password) {
-      updateUserPassword([user, req.body.password])
+    } if (req.body.password) {
+      updateUserPassword(user, req.body.password)
         .then(data => {
-          res.send('update user password SUCCESS')
-          res.redirect("user_profile");
+          console.log('update user password SUCCESS')
+          console.log(data);
+
         })
         .catch(err => {
           if (err) {
@@ -167,6 +170,8 @@ module.exports = ({addUser, getUserByID, getUserByEmail, updateUserName, updateU
           }
         });;
     }
+    res.render("../views/user_profile")
+
   });
 
 
