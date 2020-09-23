@@ -101,7 +101,6 @@ module.exports = db => {
       })
   }
 
-
   const addResourceReview = function (review, currentUser, resourceID) {
     console.log(review)
     const queryStr = {

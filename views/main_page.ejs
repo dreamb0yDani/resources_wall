@@ -3,9 +3,18 @@
 
 <body>
   <% if (user) { %>
-  <form action="/resources" method="POST">
-    <label for="new_content">What are you humming about?</label>
-    <textarea name="text" id="new-content"></textarea>
+  <form action="/resources" method="POST" id="new_resource_form">
+    <label for="new_resource">Submit a resource!</label>
+    <textarea form="new_resource_form" name="url" type="url" id="new_resource_url" placeholder="http://www.example.com" required></textarea>
+    <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="The title of your post" required></textarea>
+    <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="Describe what your resource is" required></textarea>
+    <label for="resource_category">Select your resource category: </label>
+    <select form="new_resource_form" name='category' id='resource_category' required>
+      <option value="1">Article</option>
+      <option value="2">Video</option>
+      <option value="3">Tutorial</option>
+    </select><br>
+    <button type="submit">Submit</button>
   </form>
   <% } %>
 
