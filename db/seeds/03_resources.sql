@@ -5,15 +5,15 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://screenrant.com/dune-2020-movie-trailer-criticism-alejandro-jodorowsky/', 'Not everyone is a fan!', 'I thought it looked neat, but check out what this former Dune director thinks', 1, 1);
+  ('https://www.udemy.com/topic/python/', 'Neat python tutorial', 'I really enjoyed this python course from Udemy', 1, 3);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://www.w3schools.com/sql/sql_join.asp', 'Click here if you love Venn diagrams...', 'I used to love them.', 2, 1);
+  ('https://www.w3schools.com/sql/sql_join.asp', 'Click here if you love Venn diagrams...', 'Just a quick visual breakdown of the different types of SQL joins', 2, 1);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://www.cinemablend.com/news/2555099/even-john-david-washington-reveals-he-cant-totally-explain-tenet', 'At least Im not alone', 'Apparently this movie is incomprehensible even to the cast', 2, 1);
+  ('https://www.youtube.com/watch?v=DHvZLI7Db8E', 'I PROMISE this will help', 'Give this video a watch if you need to know more about promises', 2, 2);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -21,7 +21,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://nypost.com/2020/09/20/halloween-2020-will-reportedly-be-brightened-by-a-rare-blue-moon/', 'Blue moon', 'This is so cool!', 3, 1);
+  ('https://www.khanacademy.org/computing/computer-programming', 'Starting with the basics', 'This really helped me out when I was just getting started!', 3, 3);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -29,7 +29,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://screenrant.com/wheel-time-tv-show-video-two-rivers-set/', 'PLEASE let this be good', 'I am such a WoT fan and really, really, REALLY want to be able to enjoy this show', 4, 1);
+  ('https://developers.google.com/web/tools/chrome-devtools/', 'The key to success', 'Seriously, guys.', 4, 3);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -37,4 +37,4 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://www.usatoday.com/story/money/2020/09/03/walmart-toy-list-2020-kids-interactive-play-christmas-holiday-gifts/5694280002/', 'Christmas is just around the corner!', 'Gift ideas for your kids! Or for you if you love Baby Yoda', 5, 1);
+  ('https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/', 'What is Node.js?', 'Check here for the answer!', 5, 2);

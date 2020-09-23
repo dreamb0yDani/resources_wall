@@ -52,10 +52,10 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     // I encountered it in this scenario, and it was a result of attempting to push a text value to a table field that requires integers.
     // Realized that Resource Wall is literally only supposed to be for learning and educational purposes. Need to redo categories? Tutorial/video/article/etc?
     addResource(resource, currentUser);
-      // .then(res => {
-      //   res.redirect("/resources")
-      // })
-      // .catch(e => res.send(e));
+    // .then(res => {
+    //   res.redirect("/resources")
+    // })
+    // .catch(e => res.send(e));
     res.redirect("/resources");
   });
 
