@@ -1,23 +1,30 @@
-<%- include('partials/_header') %>
-
 <body>
+  <%- include('partials/_header') %>
+<main id="update-profile">
+  <h2>Update Your Information</h2>
+  <form action="/users/:id" method="POST">
+    <div>
+      <label for="name">change name</label>
+      <input type="text" name="name">
+    </div>
 
-  <form action="/users/:id" method="POST" id="update-profile">
-    <label for="name">Change your name here</label>
-    <input type="text" name="name">
+    <div>
+      <label for="email">change email </label>
+      <input type="email" name="email">
+    </div>
 
+    <div>
+      <label for="password">change password</label>
+      <input type="password" name="password">
+    </div>
 
-    <label for="email">Change your email here </label>
-    <input type="email" name="email">
-
-    <label for="password">Change your password here </label>
-    <input type="password" name="password">
-
-    <button type="submit">UPDATE</button>
+    <div>
+      <button type="submit">UPDATE</button>
+    </div>
 
   </form>
 
 
-
+</main>
 
 </body>

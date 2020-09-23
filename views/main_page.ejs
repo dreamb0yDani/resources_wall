@@ -5,11 +5,13 @@
   <main class="main-container">
   <% if (user) { %>
   <form action="/resources" method="POST" id="new_resource_form">
-    <label for="new_resource">Submit a resource!</label>
+    <label for="new_resource">share your resource</label>
+
     <textarea form="new_resource_form" name="url" type="url" id="new_resource_url" placeholder="http://www.example.com" required></textarea>
-    <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="The title of your post" required></textarea>
-    <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="Describe what your resource is" required></textarea>
-    <label for="resource_category">Select your resource category: </label>
+    <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title" required></textarea>
+    <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description" required></textarea>
+
+    <label for="resource_category">category: </label>
     <select form="new_resource_form" name='category' id='resource_category' required>
       <option value="1">Article</option>
       <option value="2">Video</option>
@@ -20,13 +22,16 @@
   <% } %>
 
 
+    <section id="main-wall">
+
     <div id="category-icons">
+      <div>filter by</div>
       <div class="category">articles</div>
       <div class="category">videos</div>
       <div class="category">tutorials</div>
     </div>
 
-    <section id="content-container">
+      <div id="content-container">
       <% for(const resource of resourceList) { %>
       <article class="content">
         <header>
@@ -36,6 +41,7 @@
         </header>
       </article>
       <% } %>
+    </div>
     </section>
 
   </main>
