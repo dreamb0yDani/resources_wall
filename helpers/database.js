@@ -12,6 +12,7 @@ module.exports = db => {
       .then(res => {
         return res.rows[0]
       })
+      .catch(err => err.message)
   }
 
   const getUserByID = function (id) {
@@ -19,7 +20,8 @@ module.exports = db => {
       .then(res => {
         //console.log('in getUserByID; result is: ', res.rows[0])
         return res.rows[0];
-      });
+      })
+      .catch(err => err.message)
   }
 
   const getUserByEmail = function (email) {
