@@ -58,14 +58,13 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
   router.get("/users/:id/resources", (req, res) => {
     //   // myResource page!
-    const currentUser = req.params.id;
-
+    const currentUser = req.session.user_id;
     myResources(currentUser)
       .then(data => {
         const resources = data;
         const templateVars = {
           resourceList: resources,
-          user: req.session.user_id
+          user: currentUser
         };
         res.render("user_resources", templateVars);
       })
