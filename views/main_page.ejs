@@ -27,22 +27,26 @@
     <section id="main-wall">
 
       <div id="category-icons">
-        <div>filter by</div>
+
+
+        <div id="filter-by">filter by</div>
         <div class="category">articles</div>
         <div class="category">videos</div>
         <div class="category">tutorials</div>
       </div>
+      <div id="content-background">
+        <div id="content-container">
+          <% for(const resource of resourceList) { %>
+          <article class="content">
+            <header>
+              <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
+              <embed src=<%= resource.url %> type=" text/html">
+                  <p><%= resource.description %></p>
+            </header>
+          </article>
+          <% } %>
+        </div>
 
-      <div id="content-container">
-        <% for(const resource of resourceList) { %>
-        <article class="content">
-          <header>
-            <h2><a href="/resources/<%= resource.id %>"><%= resource.title %></a></h2>
-            <embed src=<%= resource.url %> type="text/html">
-            <p><%= resource.description %></p>
-          </header>
-        </article>
-        <% } %>
       </div>
     </section>
 

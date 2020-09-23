@@ -9,6 +9,7 @@ body {
 
   background-image: url("./images/bg3.jpg");
   background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +22,7 @@ body {
     align-items: center;
     font-size: 1.2em;
     color:#215361;
-    background: #c5c4c4;
-
+    //background: #bdcebe90;
     //background-color: rgba(120,160,200,0.8);
     //background-color:bisque;
 
@@ -42,21 +42,23 @@ body {
     font-size: 1em;
     font-weight: bolder;
     color: #215361;
-    margin: auto auto 2em 2em;
+    margin: 0 auto 2em 2em;
 
-
+    #filter-by {
+      margin-top: 0.5em;
+    }
     //text-color:
 
     .category {
       //height: 100%;;
       margin: auto 1em auto 1em;
       padding: 0.5em;
-      background-color: #bdcebe90;
+
       border-radius: 10px;
     }
 
     .category:hover {
-      color: white;
+      background-color: #99996680; // #bdcebe90;
     }
 
   }
