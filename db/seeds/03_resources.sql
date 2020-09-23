@@ -5,7 +5,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://screenrant.com/dune-2020-movie-trailer-criticism-alejandro-jodorowsky/', 'Not everyone is a fan!', 'I thought it looked neat, but check out what this former Dune director thinks', 1, 2);
+  ('https://screenrant.com/dune-2020-movie-trailer-criticism-alejandro-jodorowsky/', 'Not everyone is a fan!', 'I thought it looked neat, but check out what this former Dune director thinks', 1, 1);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -13,7 +13,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://www.cinemablend.com/news/2555099/even-john-david-washington-reveals-he-cant-totally-explain-tenet', 'At least Im not alone', 'Apparently this movie is incomprehensible even to the cast', 2, 2);
+  ('https://www.cinemablend.com/news/2555099/even-john-david-washington-reveals-he-cant-totally-explain-tenet', 'At least Im not alone', 'Apparently this movie is incomprehensible even to the cast', 2, 1);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -21,7 +21,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://nypost.com/2020/09/20/halloween-2020-will-reportedly-be-brightened-by-a-rare-blue-moon/', 'Blue moon', 'This is so cool!', 3, 2);
+  ('https://nypost.com/2020/09/20/halloween-2020-will-reportedly-be-brightened-by-a-rare-blue-moon/', 'Blue moon', 'This is so cool!', 3, 1);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -29,7 +29,7 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://screenrant.com/wheel-time-tv-show-video-two-rivers-set/', 'PLEASE let this be good', 'I am such a WoT fan and really, really, REALLY want to be able to enjoy this show', 4, 2);
+  ('https://screenrant.com/wheel-time-tv-show-video-two-rivers-set/', 'PLEASE let this be good', 'I am such a WoT fan and really, really, REALLY want to be able to enjoy this show', 4, 1);
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
@@ -37,4 +37,4 @@ VALUES
 INSERT INTO resources
   (url, title, description, user_id, category_id)
 VALUES
-  ('https://www.usatoday.com/story/money/2020/09/03/walmart-toy-list-2020-kids-interactive-play-christmas-holiday-gifts/5694280002/', 'Christmas is just around the corner!', 'Gift ideas for your kids! Or for you if you love Baby Yoda', 5, 2);
+  ('https://www.usatoday.com/story/money/2020/09/03/walmart-toy-list-2020-kids-interactive-play-christmas-holiday-gifts/5694280002/', 'Christmas is just around the corner!', 'Gift ideas for your kids! Or for you if you love Baby Yoda', 5, 1);
