@@ -116,7 +116,20 @@ module.exports = db => {
       .then(res => {
         return res.rows[0]
       })
+  }
 
+  const addResourceTopic = function (topic, resourceID) {
+    const queryStr = {
+      text: `INSERT INTO topics (tag, resource_id)
+      VALUES($1, $2)`,
+      values: [topic, resourceID]
+    }
+
+    return db
+      .query(queryStr)
+      .then(res => {
+        return res.rows[0]
+      })
   }
 
   return {
@@ -130,6 +143,7 @@ module.exports = db => {
     addResource,
     myResources,
     getResourceByID,
-    addResourceReview
+    addResourceReview,
+    addResourceTopic
   }
 }

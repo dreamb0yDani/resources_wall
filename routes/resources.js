@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, addResourceTopic }) => {
 
   // router.get("/api/resources", (req, res) => {
   //   let query = `SELECT * FROM resources`;
@@ -24,8 +24,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
   //         .json({ error: err.message });
   //     });
   // });
-
-
 
   // go to main page
   router.get("/resources", (req, res) => {
@@ -47,15 +45,13 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     const resource = req.body;
     const currentUser = req.session.user_id;
-    // had issues getting page to redirect inside of promise. Removed promise and everything seems to function just fine?
-    // fyi the weird error we were getting when testing the user review form from earlier is a PG error related to an improperly structured query.
-    // I encountered it in this scenario, and it was a result of attempting to push a text value to a table field that requires integers.
-    // Realized that Resource Wall is literally only supposed to be for learning and educational purposes. Need to redo categories? Tutorial/video/article/etc?
-    addResource(resource, currentUser);
-    // .then(res => {
-    //   res.redirect("/resources")
-    // })
-    // .catch(e => res.send(e));
+    addResource(resource, currentUser)
+    .then(data => {
+      const addedResource = data[0];
+      if (resource.topic) {
+        addResourceTopic(resource.topic, addedResource.id);
+      }
+    })
     res.redirect("/resources");
   });
 
