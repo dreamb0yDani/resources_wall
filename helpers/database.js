@@ -119,6 +119,20 @@ module.exports = db => {
 
   }
 
+  const getQueryResource = function (query) {
+    const queryStr = {
+      text: `SELECT resources.* FROM resources WHERE LOWER(title) LIKE $1;`,
+      values: [`%${query}%`]
+    }
+
+    return db
+      .query(queryStr)
+      .then(res => {
+        return res.rows
+      })
+      .catch(err => err.message)
+  }
+
   return {
     addUser,
     getUserByID,
@@ -130,6 +144,7 @@ module.exports = db => {
     addResource,
     myResources,
     getResourceByID,
-    addResourceReview
+    addResourceReview,
+    getQueryResource
   }
 }

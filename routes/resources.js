@@ -8,28 +8,37 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource }) => {
 
-  // router.get("/api/resources", (req, res) => {
-  //   let query = `SELECT * FROM resources`;
-  //   console.log(query);
-  //   db.query(query)
-  //     .then(data => {
-  //       const resources = data.rows;
-  //       res.json({ resources });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
+  router.get("/api/resources/", (req, res) => {
+
+    const { search } = req.query;
+
+    if (!search) {
+      getAllResources()
+        .then(data => {
+          res.json({ data });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    } else {
+      getQueryResource(search)
+        .then(result => {
+          res.json(result)
+        })
+        .catch(err => err.message)
+    }
+  });
 
 
 
   // go to main page
   router.get("/resources", (req, res) => {
     // all the resrouces form the database regardless of the user.
+
     getAllResources()
       .then(data => {
         const resources = data;
