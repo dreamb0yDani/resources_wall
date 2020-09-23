@@ -37,7 +37,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
           resourceList: resources,
           user: req.session.user_id
         };
-        console.log(templateVars.user)
         res.render("main_page", templateVars)
       })
       .catch(e => res.send(e));
@@ -48,20 +47,21 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     const resource = req.body;
     const currentUser = req.session.user_id;
-
-    addResource(resource, currentUser)
-      .then(res => {
-        res.redirect("/resources")
-      })
-      .catch(e => res.send(e));
+    // had issues getting page to redirect inside of promise. Removed promise and everything seems to function just fine?
+    // fyi the weird error we were getting when testing the user review form from earlier is a PG error related to an improperly structured query.
+    // I encountered it in this scenario, and it was a result of attempting to push a text value to a table field that requires integers.
+    // Realized that Resource Wall is literally only supposed to be for learning and educational purposes. Need to redo categories? Tutorial/video/article/etc?
+    addResource(resource, currentUser);
+      // .then(res => {
+      //   res.redirect("/resources")
+      // })
+      // .catch(e => res.send(e));
+    res.redirect("/resources");
   });
 
 
   router.get("/users/:id/resources", (req, res) => {
     //   // myResource page!
-    // I don't think we need the id here (/users/:id/resources)? /users/resources should just return the result of the resource query that is performed using the user_id cookie?
-
-    // const currentUser = req.session.user_id;
     const currentUser = req.params.id;
 
     myResources(currentUser)
@@ -75,8 +75,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
-
-
 
   router.get("/resources/:id", (req, res) => {
     // accessa specific resources

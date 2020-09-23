@@ -1,9 +1,14 @@
 INSERT INTO categories
   (name)
 VALUES
-  ('educational');
+  ('article');
 
 INSERT INTO categories
   (name)
 VALUES
-  ('entertainment');
+  ('video');
+
+  INSERT INTO categories
+  (name)
+VALUES
+  ('tutorial');
