@@ -79,7 +79,13 @@ module.exports = ({ addUser,
 
     getUserByEmail(email)
       .then(user => {
-        if (email === user.email && bcrypt.compareSync(password, user.password)) {
+        if (!user) {
+          req.session.message = {
+            intro: " No User Exist:",
+            message: "Please register!"
+          }
+          res.redirect("/register")
+        } else if (user.email === email && bcrypt.compareSync(password, user.password)) {
           req.session.user_id = user.id;
           return res.redirect("/resources");
         } else {

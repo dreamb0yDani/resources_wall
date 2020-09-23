@@ -32,13 +32,14 @@ $(document).ready(() => {
   //   //   }
   //   // });;
   //   // });
-  //   const loadContents = () => {
-  //     $.ajax("/api/resources", { method: "GET", dataType: "JSON" })
-  //       .then(dataReceived => {
-  //         // console.log(dataReceived[0])
-  //         renderContent(dataReceived)
-  //       })
-  //   }
+  // const loadContents = () => {
+  //   $.ajax("/api/resources", { method: "GET", dataType: "JSON" })
+  //     .then(dataReceived => {
+  //       // console.log(dataReceived[0])
+  //       renderContent(dataReceived)
+  //     })
+  // }
 
-  //   loadContents();
+  // loadContents();
+
 })
