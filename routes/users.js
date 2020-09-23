@@ -31,10 +31,10 @@ module.exports = ({ addUser,
   // });
 
   // const userValidation = email => {
-  //   getUserByEmail(email)
+  //   return getUserByEmail(email)
   //     .then(user => {
   //       if (user) {
-  //         return res.send("Error,email already exist")
+  //         return "Error,email already exist"
   //       }
   //     })
   // }
@@ -50,13 +50,22 @@ module.exports = ({ addUser,
     const user = req.body;
     user.password = bcrypt.hashSync(req.body.password, 10)
 
-    // userValidation(req.body.email)
-    //   .then(res => ))
-    addUser(user)
-      .then(user => {
-        console.log(user)
-        req.session.user_id = user.id;
-        res.redirect("/resources")
+    getUserByEmail(req.body.email)
+      .then(data => {
+        if (!data) {
+          addUser(user)
+            .then(user => {
+              console.log(user)
+              req.session.user_id = user.id;
+              return res.redirect("/resources")
+            })
+        } else {
+          req.session.message = {
+            intro: " User Already Exist:",
+            message: "Please login Or Register with different email!!"
+          }
+          res.redirect("/register")
+        }
       })
   })
 
@@ -66,12 +75,29 @@ module.exports = ({ addUser,
   });
 
   router.post("/login", (req, res) => {
-
-    const email = req.body.email;
+    // check iif any of the field is empty
+    if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
+      // show the message on the screen without redirecting to error message
+      req.session.message = {
+        intro: " Empty fields:",
+        message: "Please insert the requested information!"
+      }
+      res.redirect("/login")
+    }
+    const { email, password } = req.body;
+    console.log(email, password)
     getUserByEmail(email)
       .then(user => {
-        req.session.user_id = user.id;
-        res.redirect("/resources");
+        if (email === user.email && bcrypt.compareSync(password, user.password)) {
+          req.session.user_id = user.id;
+          return res.redirect("/resources");
+        } else {
+          req.session.message = {
+            intro: " User Already Exist:",
+            message: "Please insert the correct credentials!"
+          }
+          res.redirect("/login")
+        }
       })
   })
 
