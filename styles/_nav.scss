@@ -12,6 +12,7 @@
     border: none;
     font-size: 17px;
     border-radius: 20px;
+    background: #b2b2b280;
     transition: width 0.4s ease-in-out;
     &:focus {
       width: 30%;
@@ -48,7 +49,7 @@
 
         &:hover {
           color: white;
-          background-color: #b2b2b270;
+          background-color: #99996680; // #b2b2b270;
           border-radius: 10px;
         }
         a {
@@ -67,7 +68,7 @@
 
     button:hover {
 
-      background-color: #b2b2b270;
+      background-color: 99996680;
       border-radius: 10px;
 
       a{
