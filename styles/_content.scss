@@ -1,3 +1,4 @@
+/*
 .main-container {
   #content-container {
     margin: 0 2rem;
@@ -21,4 +22,27 @@ main-container #content-container {
   margin: 35px 0;
   padding: 0 15px;
   transition: box-shadow 0.5s;
+}
+*/
+#main-wall {
+  //background:#b2b2b250;
+  background: #bdcebe40;
+  margin-top: 4em;
+  padding-top: 2em;
+  #content-container {
+    margin: auto 3em auto 3em;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    article.content {
+      background: #bdcebe;
+      border-radius: 15px;
+      &:hover {
+        border: 2px solid #b2b2b250;
+        box-shadow: 0 0 3px 3px #b2b2b270;
+    }
+  }
+  }
 }
