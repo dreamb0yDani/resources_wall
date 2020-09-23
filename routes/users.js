@@ -118,7 +118,6 @@ module.exports = ({ addUser,
     }
     getUserByID(req.session.user_id)
       .then(user => {
-        req.session.user_id = req.params.id;
         const templateVars = { user: user }
         return res.render("user_profile", templateVars);
       })

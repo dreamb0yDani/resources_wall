@@ -19,6 +19,7 @@
       <h1><a href="/resources">Resource Wall</a></h1>
       <h4>share and inspire.</h4>
     </div>
+
     <input type="search" placeholder="Search">
 
     <nav class="nav-buttons">
@@ -33,14 +34,16 @@
         </button>
       </div>
       <% } else { %>
-
-      <button>
-        My Resources
-      </button>
-      <button>
-        Profile
-      </button>
-
+      <form method="GET" action="/users/<%= user %>/resources">
+        <button>
+          My Resources
+        </button>
+      </form>
+      <form method="GET" action="/users/<%= user %>">
+        <button>
+          Profile
+        </button>
+      </form>
       <form method="POST" action="/logout">
         <button type="submit" id="logout-button">
           Logout

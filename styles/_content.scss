@@ -27,33 +27,75 @@ main-container #content-container {
 #main-wall {
   //background:#b2b2b250;
    //#bdcebe40;
-   div {
-   display: flex;
-   flex-direction: column;
-   //justify-content: center;
-   align-items: center;
-   //background: #bbab9b65;
-  margin-top: 6em;
-  //padding-top: 2em;
-  #content-container {
 
-    //margin: auto 3em auto 3em;
-    width: 95%;
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: 25% 50% 25%;
-    grid-template-rows: 1fr 1fr 1fr;
+   #category-icons {
 
-    article.content {
-      background:  #bbab9b99;        // #c5d5c5; //#bdcebe;
-      border-radius: 15px;
-      &:hover {
-        border: 2px solid #b2b2b250;
-        box-shadow: 0 0 3px 3px #b2b2b270;
-        background-color:  #99996680;//#c5d5c5;// #bdcebe;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1em;
+    font-weight: bolder;
+    color: #215361;
+    margin: 4em 2em 0 2em;
 
+    #filter-by {
+      //margin-top: 0.5em;
+      margin: auto 1em auto 1em;
+      padding: 0.5em;
     }
+    //text-color:
+
+    .category {
+      //height: 100%;;
+      margin: auto 1em auto 1em;
+      padding: 0.5em;
+
+      border-radius: 10px;
+    }
+
+    .category:hover {
+      background-color: #99996680; // #bdcebe90;
+    }
+
   }
+
+  #content-background {
+    //width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #bbab9b65;
+    margin-top: 1em;
+    //padding-top: 2em;
+
+      #content-container {
+      //background:#b2b2b290;
+        padding: 0;
+        width: 95%;
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: 25% 50% 25%;
+        grid-template-rows: 1fr 1fr 1fr;
+        background: none;
+        margin: 0 0 0 0;
+        align-items: center;
+        justify-content: center;
+
+        article.content {
+          background:  #bbab9b99;        // #c5d5c5; //#bdcebe;
+          border-radius: 15px;
+          height: 100%;
+          width: 100%;
+
+          &:hover {
+            border: 2px solid #b2b2b250;
+            box-shadow: 0 0 3px 3px #b2b2b270;
+            background-color:  #99996680;//#c5d5c5;// #bdcebe;
+
+        }
+      }
   }
 }
 }
