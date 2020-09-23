@@ -1,16 +1,29 @@
 <%- include('partials/_header') %>
 
 <body>
-  <h2>Create Account</h2>
+  <main id="register-form">
+  <h2>Join our Community</h2>
   <form action="/register" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" required>
-    <label for="email">Email address</label>
-    <input type="email" name="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" required>
+    </div>
+
+    <div>
+      <label for="email">Email address</label>
+      <input type="email" name="email" required>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" required>
+   </div>
+
+   <div>
     <button type="submit">Register</button>
+  </div>
   </form>
+</main>
 </body>
 
 </html>

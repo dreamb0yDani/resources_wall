@@ -17,19 +17,28 @@
   <div class="top-nav">
     <h1 class="nav-logo"><a href="/resources">Resource Wall</a></h1>
     <input type="text" placeholder="Search">
-    <nav class="nav">
+    <nav class="nav-buttons">
       <ul>
         <% if (!user) { %>
         <button>
-          <li><a href="../register">Register</a></li>
+          <li><a href="/register">Register</a></li>
         </button>
         <button>
-          <li><a href="../login">Login</a></li>
+          <li><a href="/login">Login</a></li>
         </button>
         <% } else { %>
 
+        <button>
+          <li>My Resources</li>
+        </button>
+        <button>
+          <li>Profile</li>
+        </button>
+
         <form method="POST" action="/logout">
-          <button type="submit">Logout</button>
+          <button type="submit" id="logout-button">
+            <li>Logout</li>
+          </button>
         </form>
         <% } %>
 

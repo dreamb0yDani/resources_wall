@@ -1,15 +1,22 @@
 <!-- main page to show the publicly available resources -->
-<%- include('partials/_header') %>
 
 <body>
-  <% if (user) { %>
-  <form action="/resources" method="POST">
-    <label for="new_content">What are you humming about?</label>
-    <textarea name="text" id="new-content"></textarea>
-  </form>
-  <% } %>
-
+  <%- include('partials/_header') %>
   <main class="main-container">
+
+    <% if (user) { %>
+      <form action="/resources" method="POST" id="post-new-resource">
+        <label for="new_content">Share Your Inspirations</label>
+        <textarea name="text" id="new-content"></textarea>
+      </form>
+      <% } %>
+
+    <div id="category-icons">
+      <div class="category">articles</div>
+      <div class="category">videos</div>
+      <div class="category">tutorials</div>
+    </div>
+
     <section id="content-container">
       <% for(const resource of resourceList) { %>
       <article class="content">
@@ -21,5 +28,7 @@
       </article>
       <% } %>
     </section>
+
   </main>
+
 </body>
