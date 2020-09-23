@@ -1,25 +1,30 @@
 <%- include('partials/_header') %>
 
-<body >
+<body>
+  <% if (message) { %>
+  <div class="error-message"> <strong><%= message.intro %></strong> <%= message.message %>
+    <% } %>
+  </div>
+
   <main id="login-form">
-  <h2>Login</h2>
-  <form  action="/login" method="POST">
-    <div>
-      <label for="email">Email address</label>
-      <input type="email" name="email">
-    </div>
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+      <div>
+        <label for="email">Email address</label>
+        <input type="email" name="email">
+      </div>
 
-    <div>
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+      </div>
 
-    <div>
-      <button type="submit">Login</button>
-    </div>
+      <div>
+        <button type="submit">Login</button>
+      </div>
 
-  </form>
-</main>
+    </form>
+  </main>
 </body>
 
 </html>

@@ -5,10 +5,16 @@
   background-color: #bdcebe40;
   padding: 0 2rem;
 
-  input[type=text] {
+  input[type=search] {
+    width: 200px;
     padding: 6px;
     border: none;
     font-size: 17px;
+    border-radius: 20px;
+    transition: width 0.4s ease-in-out;
+    &:focus {
+      width: 30%;
+    }
   }
   .nav-logo {
     a {
