@@ -10,6 +10,8 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 const cookieSession = require("cookie-session")
+const connectFlash = require("connect-flash");
+const session = require("express-session");
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -36,6 +38,21 @@ app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2"]
 }))
+app.use(session({
+  options: {
+    secret: "secret",
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: null
+    }
+  }
+}))
+app.use((req, res, next) => {
+  res.locals.message = req.session.message
+  delete req.session.message
+  next()
+})
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
