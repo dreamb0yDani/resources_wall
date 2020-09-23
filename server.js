@@ -38,16 +38,20 @@ app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2"]
 }))
+
+// Express Session
 app.use(session({
   options: {
     secret: "secret",
     resave: true,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: null
-    }
+    saveUninitialized: true,
   }
 }))
+
+// Connect Flash
+app.use(connectFlash())
+
+// Global variable
 app.use((req, res, next) => {
   res.locals.message = req.session.message
   delete req.session.message
