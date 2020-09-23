@@ -30,15 +30,6 @@ module.exports = ({ addUser,
   //     })
   // });
 
-  // const userValidation = email => {
-  //   return getUserByEmail(email)
-  //     .then(user => {
-  //       if (user) {
-  //         return "Error,email already exist"
-  //       }
-  //     })
-  // }
-
   // register route for the user
   router.get("/register", (req, res) => {
 
@@ -76,16 +67,16 @@ module.exports = ({ addUser,
 
   router.post("/login", (req, res) => {
     // check iif any of the field is empty
-    if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
+    const { email, password } = req.body;
+    if (!email || !password) {
       // show the message on the screen without redirecting to error message
       req.session.message = {
         intro: " Empty fields:",
         message: "Please insert the requested information!"
       }
-      res.redirect("/login")
+      return res.redirect("/login")
     }
-    const { email, password } = req.body;
-    console.log(email, password)
+
     getUserByEmail(email)
       .then(user => {
         if (email === user.email && bcrypt.compareSync(password, user.password)) {
@@ -111,11 +102,17 @@ module.exports = ({ addUser,
 
   router.get("/users/:id", (req, res) => {
     // take you to the user profile
-    req.session.user_id = req.params.id;
+    if (!req.session.user_id) {
 
+      req.session.message = {
+        intro: " Cannot Access:",
+        message: "Please Login or Register!"
+      }
+      return res.redirect("/login")
+    }
     getUserByID(req.session.user_id)
       .then(user => {
-        //
+        req.session.user_id = req.params.id;
         const templateVars = { user: user }
         return res.render("user_profile", templateVars);
       })
