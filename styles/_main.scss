@@ -44,9 +44,25 @@ body {
 
   main {
     margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+
+    #slogan {
+      //text-align: right;
+      margin: 1em 6em 3em auto;
+      padding:  0 2em 0 2em;
+
+
+    }
   }
-  h2 {
+  h1 {
     color: #215361;
+
+
+
+
+
   }
 
 }

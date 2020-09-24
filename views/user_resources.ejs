@@ -5,7 +5,8 @@
   <main id="my-resources-page" style="margin-bottom:20px;text-align:center;list-style-type: none">
 
     <div id="my-resources-page-content">
-      <div id="my-resource-header"><h1 style="margin-bottom:50px;">My Resources</h1></div>
+
+      <div id="my-resources-header"><h1 style="margin-bottom:50px;">My Resources</h1></div>
 
       <div id="my-resources-container">
 
@@ -14,7 +15,7 @@
           <% for(const resource of resourceList) { %>
           <div class="my-single-resource">
             <div class='resource-title'><%= resource.title %></div>
-            <div class='resource-url'><%= resource.url %></div>
+            <!--<div class='resource-url'><%= resource.url %></div>-->
             <div class='resource-description'><%= resource.description %></div>
 
           </div>
@@ -23,14 +24,14 @@
         </section>
 
         <section id="my-liked-resources">
-          <div><h3>popular</h3></div>
+          <div><h3>liked by me</h3></div>
           <!-- this part should be get reviews ORDERED BY #of likes in DESC order-->
           <!--using the same templateVars as above as placeholder-->
 
           <% for(const resource of resourceList) { %>
             <div class="single-liked-resource">
               <div class='resource-title'><%= resource.title %></div>
-              <div class='resource-url'><%= resource.url %></div>
+              <!-- <div class='resource-url'><%= resource.url %></div> -->
               <div class='resource-description'><%= resource.description %></div>
             </div>
           <% } %>
@@ -39,7 +40,8 @@
 
     </div>
   </div>
-
+</div>
+</main>
 </main>
 
 </body>
