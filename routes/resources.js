@@ -8,26 +8,35 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, addResourceTopic }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource }) => {
 
-  // router.get("/api/resources", (req, res) => {
-  //   let query = `SELECT * FROM resources`;
-  //   console.log(query);
-  //   db.query(query)
-  //     .then(data => {
-  //       const resources = data.rows;
-  //       res.json({ resources });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
+  router.get("/api/resources/", (req, res) => {
+
+    const { search } = req.query;
+
+    if (!search) {
+      getAllResources()
+        .then(data => {
+          res.json({ data });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    } else {
+      getQueryResource(search)
+        .then(result => {
+          res.json(result)
+        })
+        .catch(err => err.message)
+    }
+  });
 
   // go to main page
   router.get("/resources", (req, res) => {
     // all the resrouces form the database regardless of the user.
+
     getAllResources()
       .then(data => {
         const resources = data;
@@ -46,26 +55,25 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     const resource = req.body;
     const currentUser = req.session.user_id;
     addResource(resource, currentUser)
-    .then(data => {
-      const addedResource = data[0];
-      if (resource.topic) {
-        addResourceTopic(resource.topic, addedResource.id);
-      }
-    })
+      .then(data => {
+        const addedResource = data[0];
+        if (resource.topic) {
+          addResourceTopic(resource.topic, addedResource.id);
+        }
+      })
     res.redirect("/resources");
   });
 
 
   router.get("/users/:id/resources", (req, res) => {
     //   // myResource page!
-    const currentUser = req.params.id;
-
+    const currentUser = req.session.user_id;
     myResources(currentUser)
       .then(data => {
         const resources = data;
         const templateVars = {
           resourceList: resources,
-          user: req.session.user_id
+          user: currentUser
         };
         res.render("user_resources", templateVars);
       })
