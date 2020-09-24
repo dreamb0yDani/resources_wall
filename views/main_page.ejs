@@ -42,8 +42,8 @@
           <% for(const resource of resourceList) { %>
           <article class="content">
             <header>
-              <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-              <embed src=<%= resource.url %> type=" text/html">
+              <h2><a href="/resources/<%= resource.id %>"><%= resource.title %></a></h2>
+              <iframe src=<%= resource.url %>></iframe>
                   <p><%= resource.description %></p>
             </header>
           </article>
