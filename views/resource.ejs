@@ -21,10 +21,10 @@
 
       <div id="review-section">
 
-        <div id="review-header"><h3>leave your review</h3></div>
+        <div id="review-header"><h3></h3></div>
 
         <form method="POST" , action="/resources/<%= id %>/reviews" id="review-contents">
-          <textarea class="review-component" id="reivew-comment">This is a review comment ~</textarea>
+          <textarea class="review-component" id="reivew-comment" placeholder="leave your review"></textarea>
           <button class="review-component" id="like-resource" type="submit">LIKE</button>
           <div class="review-component" id="review-rating">rating: __ out of 5 ~</div>
           <button class="review-component" id="submit-review" type="submit">submit review</button>
