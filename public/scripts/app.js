@@ -19,6 +19,66 @@ const createContentElement = content => {
   return $content
 }
 
+const renderReviews = (reviewsList) => {
+
+  //$("#past-reviews-container").empty();
+
+  for (const reviewObj of reviewsList) {
+    $("#past-reviews-container").append(createReviewElement(reviewObj));
+  }
+
+}
+
+const createReviewElement = review => {
+
+  if (review.liked) {
+    let $review = `
+    <article class="single-review">
+
+      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
+      <div class="single-review-component">user ${review.user_id} liked your resource!</div>
+      <div class="single-review-component">${review.rating}</div>
+
+    </article>
+    `
+    return $review;
+
+  } else {
+
+    let $review = `
+    <article class="single-review">
+
+      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
+      <div class="single-review-component"></div>
+      <div class="single-review-component">${review.rating}</div>
+
+    </article>
+    `
+    return $review;
+
+  }
+
+}
+
+const loadReviews = function(id) {
+
+  $.ajax({
+    url: `/api/resources/${id}/reviews`,
+    method: 'GET',
+    dataType: 'JSON',
+    //data: {id: req.params.id}
+  })
+  .then(result => {
+    console.log('inside loadReviews. then')
+    $("#past-reviews-container").empty();
+    renderReviews(result)})
+    .catch(err => console.log(err.message))
+}
+
+
+
 $(document).ready(() => {
   console.log('Ready')
 
@@ -40,4 +100,31 @@ $(document).ready(() => {
       }
     })
   })
-})
+
+
+
+  //loadReviews();
+
+  /*
+  $(window).scroll(function() {
+
+    $.fn.scrollBottom = function() {
+      return $(document).height() - this.scrollTop() - this.height();
+    };
+
+    if($(window).scrollBottom() == $(document).height() - $(window).height()) {
+
+      $.ajax({
+        url: `/resources/:id/reviews`,
+        method: 'GET',
+        dataType: 'JSON'
+      })
+      .then(result => renderReviews(result))
+      .catch(err => console.log(err.message))
+    }
+    */
+  })
+
+
+
+

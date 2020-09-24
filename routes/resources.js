@@ -33,6 +33,17 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     }
   });
 
+  router.get("/api/resources/:id/reviews", (req, res) => {
+
+    const resourceID = req.params.id;
+
+    getAllReviews(resourceID)
+    .then(reviewsList => {
+      res.json(reviewsList)
+    })
+    .catch(err => err.message)
+  })
+
   // go to main page
   router.get("/resources", (req, res) => {
     // all the resrouces form the database regardless of the user.
@@ -86,7 +97,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     getResourceByID(resourceID)
       .then(data => {
-        const resource = data[0];
+        const resource = data;
         const templateVars = {
           aResource: resource,
           user: req.session.user_id,
