@@ -1,15 +1,57 @@
-#single-resource-page {
+#my-resources-page {
 
   height: 100%;
   margin-top: 0;
+
   display: flex;
   justify-content: center;
+
+
+    #my-resources-page-content {
+      //margin-top: 4em;
+      background:   #99996699;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      #my-resources-header {
+        //margin-top: 0;
+        h1 {
+          text-align:center;
+
+        }
+      }
+
+      #my-resources-container {
+        margin-top: 0;
+        display: grid;
+        grid-gap: 3em;
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+
+
+        .my-single-resource, .single-liked-resource{
+          padding: 2em;
+          border: 2px solid #215361;
+          border-radius: 20px;
+          //box-shadow: 0 0 3px 3px #b2b2b270;
+        }
+
+        section {
+          display: grid;
+          row-gap: 15px;
+        }
+      }
 }
 
+}
+/*
 .resource-and-reviews {
   height: 100%;
   width: 70%;
-  background:   #99996699;
+  background:   #99996699;;
   //background: #bbab9b99;
   padding-top: 3em;
   display: flex;
@@ -71,4 +113,4 @@
     }
 
 }
-
+*/

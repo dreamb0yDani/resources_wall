@@ -2,20 +2,44 @@
   <header>
     <%- include('partials/_header') %>
   </header>
+  <main id="my-resources-page" style="margin-bottom:20px;text-align:center;list-style-type: none">
 
-  <h1 style="margin-bottom:50px;text-align:center">My Resources</h1>
+    <div id="my-resources-page-content">
+      <div id="my-resource-header"><h1 style="margin-bottom:50px;">My Resources</h1></div>
 
-  <ul class='all-resources'>
-    <% for(const resource of resourceList) { %>
-    <li style="margin-bottom:20px;text-align:center;list-style-type: none">
-      <div class='resource-title'><%= resource.title %></div>
-      <div class='resource-url'><%= resource.url %></div>
-      <div class='resource-description'><%= resource.description %></div>
+      <div id="my-resources-container">
 
+        <section id="all-my-resources">
+          <div><h3>collection</h3></div>
+          <% for(const resource of resourceList) { %>
+          <div class="my-single-resource">
+            <div class='resource-title'><%= resource.title %></div>
+            <div class='resource-url'><%= resource.url %></div>
+            <div class='resource-description'><%= resource.description %></div>
 
-    </li>
+          </div>
 
-    <% } %>
-  </ul>
+          <% } %>
+        </section>
+
+        <section id="my-liked-resources">
+          <div><h3>popular</h3></div>
+          <!-- this part should be get reviews ORDERED BY #of likes in DESC order-->
+          <!--using the same templateVars as above as placeholder-->
+
+          <% for(const resource of resourceList) { %>
+            <div class="single-liked-resource">
+              <div class='resource-title'><%= resource.title %></div>
+              <div class='resource-url'><%= resource.url %></div>
+              <div class='resource-description'><%= resource.description %></div>
+            </div>
+          <% } %>
+
+        </section>
+
+    </div>
+  </div>
+
+</main>
 
 </body>
