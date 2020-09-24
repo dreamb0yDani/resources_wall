@@ -10,6 +10,7 @@
       <textarea form="new_resource_form" name="url" type="url" id="new_resource_url" placeholder="http://www.example.com" required></textarea>
       <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title" required></textarea>
       <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"required></textarea>
+      <textarea form="new_resource_form" name="image" id="new_resource_image" placeholder="provide an image link that represents your content" required></textarea>
       <textarea form='new_resource_form' name="topic" id="new_resource_topic" placeholder="Resource topic (javascript, etc.)"></textarea>
 
       <label for="resource_category">category: </label>
@@ -43,7 +44,7 @@
           <article class="content">
             <header>
               <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-              <embed src=<%= resource.url %> type="video/webm">
+              <img src=<%= resource.image_url %>>
                   <p><%= resource.description %></p>
             </header>
           </article>

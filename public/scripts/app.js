@@ -11,7 +11,7 @@ const createContentElement = content => {
   <article class="content">
         <header>
           <h2><a href="/resources/<%= resource.id %>"">${content.title}</a></h2>
-          <embed src=${content.url} type="text/html">
+          <img src=${content.image_url}>
           <p>${content.description}</p>
         </header>
       </article>`
