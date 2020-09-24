@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews , addResourceTopic}) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic }) => {
 
   router.get("/api/resources/", (req, res) => {
 
@@ -86,7 +86,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     getResourceByID(resourceID)
       .then(data => {
-        const resource = data[0];
+        const resource = data;
         const templateVars = {
           aResource: resource,
           user: req.session.user_id,
@@ -109,7 +109,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     addResourceReview(review, currentUser, resourceID)
       .then(res => {
-        console.log(res)
         res.redirect("/resources/:id")
       })
       .catch(e => res.send(e));

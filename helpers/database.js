@@ -147,9 +147,7 @@ module.exports = db => {
       .catch(err => err.message)
   }
 
-  const getAllReviews = function (resourceID){
-    //console.log('BBBBBBB');
-    console.log(resourceID);
+  const getAllReviews = function (resourceID) {
 
     const queryStr = {
       text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = $1;`,
@@ -158,10 +156,27 @@ module.exports = db => {
 
     return db
       .query(queryStr)
-      .then(res => res.rows)
+      .then(res => {
+        console.log(res.rows)
+        res.rows
+      })
       .catch.catch(err => err.message);
 
   }
+
+  // const getResourceReview = function (resourceID) {
+
+  //   const queryStr = {
+  //     text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = $1 WHERE ;`,
+  //     values: [resourceID]
+  //   }
+
+  //   return db
+  //     .query(queryStr)
+  //     .then(res => res.rows)
+  //     .catch.catch(err => err.message);
+
+  // }
 
   return {
     addUser,
