@@ -156,7 +156,7 @@ module.exports = ({ addUser,
         });
 
     } if (req.body.password) {
-      updateUserPassword(user, req.body.password)
+      updateUserPassword(user, bcrypt.hashSync(req.body.password, 10))
         .then(data => {
           console.log('update user password SUCCESS')
           console.log(data);
