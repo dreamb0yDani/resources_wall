@@ -11,6 +11,7 @@
     height: 8em;
     margin: auto auto 1.5em auto;
     border: 2px solid #b2b2b2;
+    //background: #bbab9b;
     //height: 40%vh;
     display: grid;
     //grid-gap: 15px;
@@ -22,7 +23,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: left;
+      //text-align: left;
+
 
         &:nth-child(1) {
           grid-column: 1/2;
@@ -32,11 +34,15 @@
           grid-column: 1/4;
           grid-row: 2/3;
           display: flex;
+          //width: 90%;
+          margin: auto 1em auto 1em;
+
           //justify-content: flex-start;
 
-          //.single-review-comment {
+          p {
+            border-bottom: 2px solid black;
 
-          //}
+          }
         }
         &:nth-child(3) {
           grid-column: 1/3;
