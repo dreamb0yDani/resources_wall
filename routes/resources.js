@@ -86,7 +86,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     getResourceByID(resourceID)
       .then(data => {
-        const resource = data[0];
+        const resource = data;
         const templateVars = {
           aResource: resource,
           user: req.session.user_id,
