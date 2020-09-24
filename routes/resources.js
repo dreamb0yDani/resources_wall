@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews , addResourceTopic}) => {
 
   router.get("/api/resources/", (req, res) => {
 
