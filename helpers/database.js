@@ -84,7 +84,8 @@ module.exports = db => {
     return db
       .query(queryStr)
       .then(res => {
-        return res.rows
+        console.log(res.rows[0]);
+        return res.rows[0];
       })
   }
 
@@ -146,6 +147,22 @@ module.exports = db => {
       .catch(err => err.message)
   }
 
+  const getAllReviews = function (resourceID){
+    //console.log('BBBBBBB');
+    console.log(resourceID);
+
+    const queryStr = {
+      text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = $1;`,
+      values: [resourceID]
+    }
+
+    return db
+      .query(queryStr)
+      .then(res => res.rows)
+      .catch.catch(err => err.message);
+
+  }
+
   return {
     addUser,
     getUserByID,
@@ -159,6 +176,7 @@ module.exports = db => {
     getResourceByID,
     addResourceReview,
     getQueryResource,
-    addResourceTopic
+    addResourceTopic,
+    getAllReviews,
   }
 }
