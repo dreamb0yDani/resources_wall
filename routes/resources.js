@@ -33,6 +33,18 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     }
   });
 
+  router.get("/api/resources/:id/", (req, res) => {
+
+    const resourceID = req.params.id;
+    console.log(resourceID, "check")
+
+    getAllReviews(resourceID)
+      .then(reviewsList => {
+        res.json(reviewsList)
+      })
+      .catch(err => err.message)
+  })
+
   // go to main page
   router.get("/resources", (req, res) => {
     // all the resrouces form the database regardless of the user.
@@ -96,7 +108,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
-
 
   router.post("/resources/:id/reviews", (req, res) => {
     // posting the reviews for a specific resource

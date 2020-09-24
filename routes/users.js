@@ -118,7 +118,7 @@ module.exports = ({ addUser,
     }
     getUserByID(req.session.user_id)
       .then(user => {
-        const templateVars = { user: user }
+        const templateVars = { user: req.session.user_id }
         return res.render("user_profile", templateVars);
       })
       .catch(err => res.send(err.message));
