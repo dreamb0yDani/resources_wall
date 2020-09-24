@@ -25,12 +25,40 @@
 
         <div id="review-header"><h3>leave your review</h3></div>
 
-        <form action="POST" , method="/resources/<%= id %>/reviews" id="review-contents">
+        <form method="POST" , action="/resources/<%= id %>/reviews" id="review-contents">
           <textarea class="review-component" id="reivew-comment">This is a review comment ~</textarea>
           <button class="review-component" id="like-resource" type="submit">LIKE</button>
           <div class="review-component" id="review-rating">rating: __ out of 5 ~</div>
           <button class="review-component" id="submit-review" type="submit">submit review</button>
         </form>
+
+      </div>
+
+      <div id="past-reviews-container">
+        <!--created and rendered by client-side js in app.js-->
+      </div>
+
+      <script>
+/*
+            const loadReviews = function() {
+
+            $.ajax({
+              url: '/api/resources/<%= id %>/reviews',
+              method: 'GET',
+              dataType: 'JSON',
+              //data: {id: req.params.id}
+            })
+            .then(result => {
+              console.log('inside loadReviews. then')
+              $("#past-reviews-container").empty();
+              renderReviews(result)})
+              .catch(err => console.log(err.message))
+            }
+*/
+            //$(document).ready(loadReviews);
+            $(document).ready(() => loadReviews(<%= id %>));
+      </script>
+
 
     </section>
   </main>

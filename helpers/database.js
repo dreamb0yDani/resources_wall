@@ -149,7 +149,7 @@ module.exports = db => {
 
   const getAllReviews = function (resourceID){
     //console.log('BBBBBBB');
-    console.log(resourceID);
+    console.log('inside getAllReiviews function; resourceID is ---', resourceID);
 
     const queryStr = {
       text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = $1;`,
@@ -159,7 +159,7 @@ module.exports = db => {
     return db
       .query(queryStr)
       .then(res => res.rows)
-      .catch.catch(err => err.message);
+      .catch(err => err.message);
 
   }
 

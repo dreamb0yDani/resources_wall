@@ -19,6 +19,48 @@ const createContentElement = content => {
   return $content
 }
 
+const renderReviews = (reviewsList) => {
+
+  //$("#past-reviews-container").empty();
+
+  for (const reviewObj of reviewsList) {
+    $("#past-reviews-container").append(createReviewElement(reviewObj));
+  }
+
+}
+
+const createReviewElement = review => {
+
+  let $review = `
+    <article class="single-review">
+
+      <header><h4>${review.user_id}</h4></header>
+      <div>${review.comment}</div>
+      <div>${review.liked}</div>
+      <div>${review.rating}</div>
+
+    </article>
+    `
+    return $review;
+}
+
+const loadReviews = function(id) {
+
+  $.ajax({
+    url: `/api/resources/${id}/reviews`,
+    method: 'GET',
+    dataType: 'JSON',
+    //data: {id: req.params.id}
+  })
+  .then(result => {
+    console.log('inside loadReviews. then')
+    $("#past-reviews-container").empty();
+    renderReviews(result)})
+    .catch(err => console.log(err.message))
+}
+
+
+
 $(document).ready(() => {
   console.log('Ready')
 
@@ -40,4 +82,31 @@ $(document).ready(() => {
       }
     })
   })
-})
+
+
+
+  //loadReviews();
+
+  /*
+  $(window).scroll(function() {
+
+    $.fn.scrollBottom = function() {
+      return $(document).height() - this.scrollTop() - this.height();
+    };
+
+    if($(window).scrollBottom() == $(document).height() - $(window).height()) {
+
+      $.ajax({
+        url: `/resources/:id/reviews`,
+        method: 'GET',
+        dataType: 'JSON'
+      })
+      .then(result => renderReviews(result))
+      .catch(err => console.log(err.message))
+    }
+    */
+  })
+
+
+
+
