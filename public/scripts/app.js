@@ -31,17 +31,35 @@ const renderReviews = (reviewsList) => {
 
 const createReviewElement = review => {
 
-  let $review = `
+  if (review.liked) {
+    let $review = `
     <article class="single-review">
 
-      <header><h4>${review.user_id}</h4></header>
-      <div>${review.comment}</div>
-      <div>${review.liked}</div>
-      <div>${review.rating}</div>
+      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
+      <div class="single-review-component">user ${review.user_id} liked your resource!</div>
+      <div class="single-review-component">${review.rating}</div>
 
     </article>
     `
     return $review;
+
+  } else {
+
+    let $review = `
+    <article class="single-review">
+
+      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
+      <div class="single-review-component"></div>
+      <div class="single-review-component">${review.rating}</div>
+
+    </article>
+    `
+    return $review;
+
+  }
+
 }
 
 const loadReviews = function(id) {
