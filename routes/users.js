@@ -52,8 +52,8 @@ module.exports = ({ addUser,
             })
         } else {
           req.session.message = {
-            intro: " User Already Exist:",
-            message: "Please login Or Register with different email!!"
+            intro: "User Already Exists:",
+            message: "Please login or register using a different email"
           }
           res.redirect("/register")
         }
@@ -81,8 +81,8 @@ module.exports = ({ addUser,
       .then(user => {
         if (!user) {
           req.session.message = {
-            intro: " No User Exist:",
-            message: "Please register!"
+            intro: "User Does Not Exist:",
+            message: "Please register an account!"
           }
           res.redirect("/register")
         } else if (user.email === email && bcrypt.compareSync(password, user.password)) {
@@ -90,8 +90,8 @@ module.exports = ({ addUser,
           return res.redirect("/resources");
         } else {
           req.session.message = {
-            intro: " User Already Exist:",
-            message: "Please insert the correct credentials!"
+            intro: " Email or Password is Incorrect:",
+            message: "Please note that passwords are case-sensitive"
           }
           res.redirect("/login")
         }
@@ -156,7 +156,7 @@ module.exports = ({ addUser,
         });
 
     } if (req.body.password) {
-      updateUserPassword(user, req.body.password)
+      updateUserPassword(user, bcrypt.hashSync(req.body.password, 10))
         .then(data => {
           console.log('update user password SUCCESS')
           console.log(data);

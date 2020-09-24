@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews , addResourceTopic}) => {
 
   router.get("/api/resources/", (req, res) => {
 
@@ -96,6 +96,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
+
 
   router.post("/resources/:id/reviews", (req, res) => {
     // posting the reviews for a specific resource

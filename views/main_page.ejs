@@ -5,13 +5,11 @@
   <main class="main-container">
     <% if (user) { %>
     <form action="/resources" method="POST" id="new_resource_form">
-      <label for="new_resource">share your resource</label>
+      <label for="new_resource_form">share your resource</label>
 
-      <textarea form="new_resource_form" name="url" type="url" id="new_resource_url"
-        placeholder="http://www.example.com" required></textarea>
+      <textarea form="new_resource_form" name="url" type="url" id="new_resource_url" placeholder="http://www.example.com" required></textarea>
       <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title" required></textarea>
-      <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"
-        required></textarea>
+      <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"required></textarea>
       <textarea form='new_resource_form' name="topic" id="new_resource_topic" placeholder="Resource topic (javascript, etc.)"></textarea>
 
       <label for="resource_category">category: </label>
@@ -42,8 +40,13 @@
           <% for(const resource of resourceList) { %>
           <article class="content">
             <header>
+<<<<<<< HEAD
+              <h2><a href="/resources/<%= resource.id %>"><%= resource.title %></a></h2>
+              <iframe src=<%= resource.url %>></iframe>
+=======
               <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-              <embed src=<%= resource.url %> type=" text/html">
+              <embed src=<%= resource.url %> type="video/webm">
+>>>>>>> master
                   <p><%= resource.description %></p>
             </header>
           </article>
