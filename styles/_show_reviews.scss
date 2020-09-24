@@ -1,6 +1,6 @@
 #past-reviews-container {
   margin-top: 2em;
-  width: 60%;
+  width: 70%;
   //display: flex;
   //flex-direction: column;
   //justify-content: space-evenly;
@@ -10,7 +10,7 @@
   .single-review {
     height: 8em;
     margin: auto auto 1.5em auto;
-    border: 2px solid #b2b2b2;
+    //border: 2px solid #b2b2b2;
     //background: #bbab9b;
     //height: 40%vh;
     display: grid;
@@ -34,13 +34,17 @@
           grid-column: 1/4;
           grid-row: 2/3;
           display: flex;
-          //width: 90%;
+          //text-align: left;
+
           margin: auto 1em auto 1em;
+          border-bottom: 0.2em solid black;
 
           //justify-content: flex-start;
 
           p {
-            border-bottom: 2px solid black;
+            margin-bottom: 0;
+            text-align: left;
+
 
           }
         }
