@@ -152,10 +152,9 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     let review = req.body;
     review.rating = parseInt(review.rating);
     console.log(req.body, "check")
-
-    // if (!review.liked) {
-    //   review.liked = false;
-    // }
+    if (!review.comment) {
+      review.comment = 'no comment'
+    }
 
     addResourceReview(review, currentUser, resourceID);
 
