@@ -90,7 +90,7 @@ module.exports = db => {
 
   const getResourceByID = function (id) {
     const queryStr = {
-      text: `SELECT * FROM resources WHERE resources.id = $1`,
+      text: `SELECT * FROM resources JOIN topics ON resources.id = topics.resource_id JOIN categories ON resources.category_id = categories.id WHERE resources.id = $1`,
       values: [id]
     }
 
