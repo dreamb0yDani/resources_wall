@@ -140,7 +140,7 @@ $(document).ready(() => {
 
 })
 
-const loadLikedResource = function (id) {
+const loadReviews = function (id) {
 
   $.ajax({
     url: `/api/resources/${id}/reviews`,
