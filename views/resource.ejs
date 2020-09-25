@@ -14,7 +14,7 @@
         </div>
         <div class="resource-url"><a href=<%= aResource.url %>><%= aResource.url %></a></div>
         <div class="resource-description"><%= aResource.description %></div>
-       <div class="resource-embedded"><a href=<%= aResource.url %>><img src=<%= aResource.image_url %>></a></div>
+        <div class="resource-embedded"><a href=<%= aResource.url %>><img src=<%= aResource.image_url %>></a></div>
         <div class="resource-footer">#<%= aResource.tag %>, <%= aResource.name %></div>
 
 
@@ -30,7 +30,7 @@
         <form method="POST" , action="/resources/<%= id %>/reviews" id="review-contents">
           <textarea name="comment" class="review-component" id="reivew-comment"
             placeholder="leave your review"></textarea>
-          <button name="liked" class="review-component" id="like-resource" type="submit">LIKE</button>
+
           <select name="rating" id="myselect">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -39,7 +39,9 @@
             <option value="5">5</option>
           </select>
 
-          <!-- <div class="review-component" id="review-rating">rating: __ out of 5 ~</div> -->
+          <input type="text" name="rating-value" value="false" />
+          <button type="button" value="false" id="like">Like</button>
+
           <button class="review-component" id="submit-review" type="submit" vaue>submit review</button>
         </form>
 

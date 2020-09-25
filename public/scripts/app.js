@@ -10,7 +10,7 @@ const createContentElement = content => {
   let $content = `
   <article class="content">
         <header>
-          <h2><a href="/resources/<%= resource.id %>"">${content.title}</a></h2>
+          <h2><a href="/resources/${content.id}">${content.title}</a></h2>
           <img src=${content.image_url}>
           <p>${content.description}</p>
         </header>
@@ -73,7 +73,6 @@ const loadReviews = function (id) {
     //data: {id: req.params.id}
   })
     .then(result => {
-      console.log('inside loadReviews. then')
       $("#past-reviews-container").empty();
       renderReviews(result)
     })
@@ -124,6 +123,21 @@ $(document).ready(() => {
       .catch(err => console.log(err.message))
     }
     */
+
+  const inputVal = $("input[name='rating-value']");
+  const input = document.getElementById("like");
+
+  $("#like").on("click", function () {
+    if (inputVal.val() === String(false)) {
+      inputVal.val("true");
+      input.innerText = "Unlke"
+    } else {
+      inputVal.val("false");
+      input.innerText = "Like"
+    }
+    $("review-contents").submit()
+  });
+
 })
 
 

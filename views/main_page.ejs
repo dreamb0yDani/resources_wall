@@ -59,19 +59,19 @@
 
         <div id="content-container">
           <% for(const resource of resourceList) { %>
-          <div class="content fill"><a href="/resources/<%= resource.id %>"">
-            <img src=<%= resource.image_url %>>
-            <div class=" title-description">
+          <div class="content fill"><a href="/resources/<%= resource.id %>">
+              <img src=<%= resource.image_url %>>
+              <div class=" title-description">
 
-              <h2><%= resource.title %></h2>
+                <h2><%= resource.title %></h2>
 
-              <p><%= resource.description %></p>
+                <p><%= resource.description %></p>
 
+              </div>
+            </a>
           </div>
-          </a>
+          <% } %>
         </div>
-        <% } %>
-      </div>
 
       </div>
     </section>

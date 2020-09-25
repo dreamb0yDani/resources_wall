@@ -36,7 +36,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
   router.get("/api/resources/:id", (req, res) => {
 
     const resourceID = req.params.id;
-    console.log(resourceID, "check")
 
     getResourceByID(resourceID)
       .then(reviewsList => {
@@ -48,7 +47,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
   router.get("/api/resources/:id/reviews", (req, res) => {
 
     const resourceID = req.params.id;
-    console.log(resourceID, "check")
 
     getAllReviews(resourceID)
       .then(reviewsList => {
@@ -135,16 +133,16 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     const resourceID = req.params.id;
 
     getResourceByID(resourceID)
-    .then(data => {
-      const resource = data;
-      const templateVars = {
-        aResource: resource,
-        user: req.session.user_id,
-        id: req.params.id
-      }
-      res.render('resource', templateVars);
-    })
-    .catch(e => res.send(e));
+      .then(data => {
+        const resource = data;
+        const templateVars = {
+          aResource: resource,
+          user: req.session.user_id,
+          id: req.params.id
+        }
+        res.render('resource', templateVars);
+      })
+      .catch(e => res.send(e));
   });
 
   router.post("/resources/:id/reviews", (req, res) => {
@@ -152,6 +150,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     const currentUser = req.session.user_id;
     const resourceID = req.params.id;
     let review = req.body;
+    console.log(req.body, "check")
     review.rating = parseInt(review.rating);
 
     if (!review.liked) {
