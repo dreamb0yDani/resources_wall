@@ -75,9 +75,22 @@ module.exports = db => {
       })
   }
 
+  const myLikedResources = function (currentUser) {
+    const queryStr = {
+      text: `SELECT * FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.user_id = $1 AND liked = true`,
+      values: [currentUser]
+    }
+
+    return db
+      .query(queryStr)
+      .then(res => {
+        return res.rows
+      })
+  }
+
   const getResourceByID = function (id) {
     const queryStr = {
-      text: `SELECT * FROM resources WHERE resources.id = $1`,
+      text: `SELECT * FROM resources JOIN topics ON resources.id = topics.resource_id JOIN categories ON resources.category_id = categories.id WHERE resources.id = $1`,
       values: [id]
     }
 
@@ -205,6 +218,7 @@ module.exports = db => {
     getQueryResource,
     addResourceTopic,
     getAllReviews,
-    getResourceIDReviewID
+    getResourceIDReviewID,
+    myLikedResources
   }
 }
