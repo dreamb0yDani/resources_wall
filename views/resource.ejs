@@ -9,12 +9,17 @@
 
       <div id="resource-section">
 
+<<<<<<< HEAD
         <div class="resource-title">
           <h1><%= aResource.title %></h1>
         </div>
         <div class="resource-url"><%= aResource.url %></div>
+=======
+        <div class="resource-title"><h1><%= aResource.title %></h1></div>
+        <div class="resource-url"><a href=<%= aResource.url %>><%= aResource.url %></a></div>
+>>>>>>> 559ed248853444b56fe5e5593a8bd24fca62eb40
         <div class="resource-description"><%= aResource.description %></div>
-        <div class="resource-embedded">EMBEDDED CONTENT! </div>
+        <div class="resource-embedded"><img src=<%= aResource.image_url %>></div>
         <div class="resource-footer">topic</div>
 
 
@@ -57,6 +62,7 @@
       </div>
 
       <script>
+<<<<<<< HEAD
         /*
                     const loadReviews = function() {
 
@@ -75,6 +81,26 @@
         */
         //$(document).ready(loadReviews);
         $(document).ready(() => loadReviews(<%= id %>));
+=======
+/*
+            const loadReviews = function() {
+
+            $.ajax({
+              url: '/api/resources/<%= id %>/reviews',
+              method: 'GET',
+              dataType: 'JSON',
+              //data: {id: req.params.id}
+            })
+            .then(result => {
+              console.log('inside loadReviews. then')
+              $("#past-reviews-container").empty();
+              renderReviews(result)})
+              .catch(err => console.log(err.message))
+            }
+*/
+            //$(document).ready(loadReviews);
+            $(document).ready(() => loadReviews('<%= id %>'));
+>>>>>>> 559ed248853444b56fe5e5593a8bd24fca62eb40
       </script>
 
 
