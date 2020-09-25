@@ -1,13 +1,10 @@
-/*
- * All routes for Widgets are defined here
- * Since this file is loaded in server.js into api/widgets,
- *   these routes are mounted onto /widgets
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
+//------------------------------------------------------------------------------
 const express = require('express');
 const router = express.Router();
-
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Resource Route Exports
+//------------------------------------------------------------------------------
 module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID, getLike }) => {
 
   router.get("/api/resources/", (req, res) => {
@@ -32,7 +29,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
         .catch(err => err.message)
     }
   });
-
+  //------------------------------------------------------------------------------
   router.get("/api/resources/:id", (req, res) => {
 
     const resourceID = req.params.id;
@@ -43,7 +40,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(err => err.message)
   })
-
+  //------------------------------------------------------------------------------
   router.get("/api/resources/:id/reviews", (req, res) => {
 
     const resourceID = req.params.id;
@@ -54,7 +51,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(err => err.message)
   })
-
+  //------------------------------------------------------------------------------
   router.get("/api/resources/:id/reviews/:r_Id", (req, res) => {
 
     const { id, r_Id } = req.params;
@@ -66,7 +63,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(err => err.message)
   })
-
+  //------------------------------------------------------------------------------
   router.get("/api/resources/:id/reviews/:r_Id/liked", (req, res) => {
 
     const { id, r_Id } = req.params;
@@ -77,12 +74,8 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(err => err.message)
   })
-
-
-
-  // go to main page
+  //------------------------------------------------------------------------------
   router.get("/resources", (req, res) => {
-    // all the resrouces form the database regardless of the user.
 
     getAllResources()
       .then(data => {
@@ -95,8 +88,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
-
-
+  //------------------------------------------------------------------------------
   router.post("/resources", (req, res) => {
 
     const resource = req.body;
@@ -110,10 +102,8 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
     res.redirect("/resources");
   });
-
-
+  //------------------------------------------------------------------------------
   router.get("/users/:id/resources", (req, res) => {
-    //   // myResource page!
     const currentUser = req.session.user_id;
     myResources(currentUser)
       .then(data => {
@@ -126,10 +116,8 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
-
-
+  //------------------------------------------------------------------------------
   router.get("/resources/:id", (req, res) => {
-    // accessa specific resources
     const resourceID = req.params.id;
 
     getResourceByID(resourceID)
@@ -144,7 +132,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       })
       .catch(e => res.send(e));
   });
-
+  //------------------------------------------------------------------------------
   router.post("/resources/:id/reviews", (req, res) => {
 
     const currentUser = req.session.user_id;
@@ -161,6 +149,8 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     res.redirect(`/resources/${resourceID}`);
 
   });
-
+//------------------------------------------------------------------------------
   return router;
 };
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
