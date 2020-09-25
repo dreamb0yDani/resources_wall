@@ -41,11 +41,9 @@ app.use(cookieSession({
 
 // Express Session
 app.use(session({
-  options: {
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  }
+  secret: "secret",
+  resave: true,
+  saveUninitialized: true,
 }))
 
 // Connect Flash

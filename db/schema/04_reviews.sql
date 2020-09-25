@@ -1,8 +1,10 @@
 -- Drop and recreate REVIEWS table (Example)
 
-DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS reviews
+CASCADE;
 
-CREATE TABLE reviews (
+CREATE TABLE reviews
+(
   id SERIAL PRIMARY KEY NOT NULL,
   comment TEXT,
   liked BOOLEAN NOT NULL DEFAULT FALSE,

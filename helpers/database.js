@@ -147,22 +147,48 @@ module.exports = db => {
       .catch(err => err.message)
   }
 
-  const getAllReviews = function (resourceID){
+  const getAllReviews = function (resourceID) {
     //console.log('BBBBBBB');
     //console.log('inside getAllReiviews function; resourceID is ---', resourceID);
-
     const queryStr = {
       text: `SELECT reviews.* FROM reviews WHERE reviews.resource_id = $1;`,
       values: [resourceID]
     }
-
     return db
       .query(queryStr)
       .then(res => {
         //console.log(res.rows);
-        return res.rows})
+        return res.rows
+      })
       .catch(err => err.message);
+  }
 
+  const getResourceIDReviewID = function (reviewID, resourceID) {
+    const queryStr = {
+      text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND  reviews.resource_id = $2;`,
+      values: [reviewID, resourceID]
+    }
+    return db
+      .query(queryStr)
+      .then(res => {
+        // console.log(res.rows);
+        return res.rows
+      })
+      .catch(err => err.message);
+  }
+
+  const getRating = function (reviewID, resourceID) {
+    const queryStr = {
+      text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND  reviews.resource_id = $2;`,
+      values: [reviewID, resourceID]
+    }
+    return db
+      .query(queryStr)
+      .then(res => {
+        // console.log(res.rows);
+        return res.rows
+      })
+      .catch(err => err.message);
   }
 
   return {
@@ -180,5 +206,6 @@ module.exports = db => {
     getQueryResource,
     addResourceTopic,
     getAllReviews,
+    getResourceIDReviewID
   }
 }
