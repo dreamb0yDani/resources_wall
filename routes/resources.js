@@ -150,12 +150,12 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     const currentUser = req.session.user_id;
     const resourceID = req.params.id;
     let review = req.body;
-    console.log(req.body, "check")
     review.rating = parseInt(review.rating);
+    console.log(req.body, "check")
 
-    if (!review.liked) {
-      review.liked = false;
-    }
+    // if (!review.liked) {
+    //   review.liked = false;
+    // }
 
     addResourceReview(review, currentUser, resourceID);
 

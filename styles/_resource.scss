@@ -61,6 +61,10 @@
           grid-template-rows: 75% 25%;
           grid-gap: 10px;
 
+          #like-field {
+            display: none;
+          }
+
 
           .review-component {
             display: flex;
