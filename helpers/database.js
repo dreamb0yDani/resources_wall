@@ -105,7 +105,6 @@ module.exports = db => {
   }
 
   const addResourceReview = function (review, currentUser, resourceID) {
-    console.log(review)
     const queryStr = {
       text: `INSERT INTO reviews (comment, liked, rating, user_id, resource_id)
       VALUES($1, $2, $3, $4, $5)`,
