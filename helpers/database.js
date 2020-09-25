@@ -77,7 +77,6 @@ module.exports = db => {
     return db
       .query(queryStr)
       .then(res => {
-        console.log(res.rows)
         return res.rows
       })
   }

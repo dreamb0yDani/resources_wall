@@ -36,7 +36,7 @@
               <!-- this part should be return resources that have been liked by the user-->
               <!--currently using the same templateVars as above as placeholder, but needs to be populated with separate query results-->
 
-              <% for(const resource of resourceList) { %>
+              <% for(const resource of likedResourceList) { %>
               <a href="/resources/<%= resource.id %>" class="single-liked-resource">
                 <div class='resource-title'><%= resource.title %></div>
                 <div class='resource-description'><%= resource.description %></div>

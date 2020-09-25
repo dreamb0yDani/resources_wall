@@ -5,7 +5,7 @@ const router = express.Router();
 //------------------------------------------------------------------------------
 // Resource Route Exports
 //------------------------------------------------------------------------------
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID, getLike }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID, getLike, myLikedResources }) => {
 
   router.get("/api/resources/", (req, res) => {
 
@@ -55,7 +55,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
   router.get("/api/resources/:id/reviews/:r_Id", (req, res) => {
 
     const { id, r_Id } = req.params;
-    console.log(req.params)
 
     getResourceIDReviewID(r_Id, id)
       .then(reviewsList => {
@@ -105,11 +104,17 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
   //------------------------------------------------------------------------------
   router.get("/users/:id/resources", (req, res) => {
     const currentUser = req.session.user_id;
-    myResources(currentUser)
+
+    const promise1 = Promise.resolve(myResources(currentUser));
+    const promise2 = Promise.resolve(myLikedResources(currentUser));
+
+    Promise.all([promise1, promise2])
       .then(data => {
-        const resources = data;
+        const resources = data[0];
+        const likedResources = data[1];
         const templateVars = {
           resourceList: resources,
+          likedResourceList: likedResources,
           user: currentUser
         };
         res.render("user_resources", templateVars);
@@ -139,7 +144,6 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     const resourceID = req.params.id;
     let review = req.body;
     review.rating = parseInt(review.rating);
-    console.log(req.body, "check")
     if (!review.comment) {
       review.comment = 'no comment'
     }
