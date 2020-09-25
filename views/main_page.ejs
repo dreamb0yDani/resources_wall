@@ -3,34 +3,46 @@
 <body>
   <%- include('partials/_header') %>
   <main class="main-container">
-    <% if (user) { %>
-    <form action="/resources" method="POST" id="new_resource_form">
-      <label for="new_resource_form">share your resource</label>
 
-      <textarea form="new_resource_form" name="url" type="url" id="new_resource_url"
-        placeholder="http://www.example.com" required></textarea>
-      <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title" required></textarea>
-      <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"
-        required></textarea>
-      <textarea form="new_resource_form" name="image" id="new_resource_image"
-        placeholder="provide an image link that represents your content" required></textarea>
-      <textarea form='new_resource_form' name="topic" id="new_resource_topic"
-        placeholder="Resource topic (javascript, etc.)"></textarea>
 
-      <label for="resource_category">category: </label>
-      <select form="new_resource_form" name='category' id='resource_category' required>
-        <option value="1">Article</option>
-        <option value="2">Video</option>
-        <option value="3">Tutorial</option>
-      </select><br>
-      <button type="submit">Submit</button>
-    </form>
-    <% } else { %>
-    <div id="slogan">
-      <h1>SHARE AND INSPIRE.</h1>
+    <div id="wrapper">
+
+      <% if (user) { %>
+      <form action="/resources" method="POST" id="new_resource_form">
+        <!--<label for="new_resource_form">share your resource</label>-->
+
+        <div id="fill-in-form">
+          <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title"
+            required></textarea>
+          <textarea form='new_resource_form' name="topic" id="new_resource_topic"
+            placeholder="Resource topic (javascript, etc.)"></textarea>
+          <textarea form="new_resource_form" name="url" type="url" id="new_resource_url"
+            placeholder="http://www.example.com" required></textarea>
+          <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"
+            required></textarea>
+          <textarea form="new_resource_form" name="image" id="new_resource_image"
+            placeholder="provide an image link for thumbnail" required></textarea>
+
+          <div id="category-submit">
+            <label for="resource_category">category: </label>
+            <select form="new_resource_form" name='category' id='resource_category' required>
+              <option value="1">Article</option>
+              <option value="2">Video</option>
+              <option value="3">Tutorial</option>
+            </select><br>
+          </div>
+          <button type="submit">Share Resource</button>
+        </div>
+
+
+
+      </form>
+      <% } else { %>
+      <div id="slogan">
+        <h1>SHARE AND INSPIRE.</h1>
+      </div>
+      <% } %>
     </div>
-    <% } %>
-
 
     <section id="main-wall">
       <!--
@@ -47,15 +59,19 @@
 
         <div id="content-container">
           <% for(const resource of resourceList) { %>
-          <article class="content">
-            <header>
-              <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-              <img src=<%= resource.image_url %>>
-                  <p><%= resource.description %></p>
-            </header>
-          </article>
-          <% } %>
+          <div class="content fill"><a href="/resources/<%= resource.id %>"">
+            <img src=<%= resource.image_url %>>
+            <div class=" title-description">
+
+              <h2><%= resource.title %></h2>
+
+              <p><%= resource.description %></p>
+
+          </div>
+          </a>
         </div>
+        <% } %>
+      </div>
 
       </div>
     </section>

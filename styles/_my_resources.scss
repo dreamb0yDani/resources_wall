@@ -33,7 +33,15 @@
         padding: 2em;
           border: 2px solid #215361;
           border-radius: 20px;
+          text-decoration: none;
+          color: black;
 
+          &:hover {
+            background: #999966;
+            //background: #bbab9b;
+            border: none;
+
+          }
        }
       }
 
