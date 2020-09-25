@@ -24,8 +24,8 @@ const renderReviews = (reviewsList) => {
   //$("#past-reviews-container").empty();
 
   for (const reviewObj of reviewsList) {
-    if(reviewObj.comment) {
-    $("#past-reviews-container").append(createReviewElement(reviewObj));
+    if (reviewObj.comment) {
+      $("#past-reviews-container").append(createReviewElement(reviewObj));
     }
   }
 
@@ -64,7 +64,7 @@ const createReviewElement = review => {
 
 }
 
-const loadReviews = function(id) {
+const loadReviews = function (id) {
 
   $.ajax({
     url: `/api/resources/${id}/reviews`,
@@ -72,10 +72,11 @@ const loadReviews = function(id) {
     dataType: 'JSON',
     //data: {id: req.params.id}
   })
-  .then(result => {
-    console.log('inside loadReviews. then')
-    $("#past-reviews-container").empty();
-    renderReviews(result)})
+    .then(result => {
+      console.log('inside loadReviews. then')
+      $("#past-reviews-container").empty();
+      renderReviews(result)
+    })
     .catch(err => console.log(err.message))
 }
 
@@ -103,8 +104,6 @@ $(document).ready(() => {
     })
   })
 
-
-
   //loadReviews();
 
   /*
@@ -125,7 +124,7 @@ $(document).ready(() => {
       .catch(err => console.log(err.message))
     }
     */
-  })
+})
 
 
 

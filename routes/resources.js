@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID, getLike }) => {
 
   router.get("/api/resources/", (req, res) => {
 
@@ -69,16 +69,18 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       .catch(err => err.message)
   })
 
-  router.get("/api/resources/:id/reviews/:r_Id/rating", (req, res) => {
+  router.get("/api/resources/:id/reviews/:r_Id/liked", (req, res) => {
 
     const { id, r_Id } = req.params;
 
-    getResourceIDReviewID(r_Id, id)
+    getLike(r_Id, id)
       .then(reviewsList => {
         res.json(reviewsList)
       })
       .catch(err => err.message)
   })
+
+
 
   // go to main page
   router.get("/resources", (req, res) => {

@@ -9,15 +9,10 @@
 
       <div id="resource-section">
 
-<<<<<<< HEAD
         <div class="resource-title">
           <h1><%= aResource.title %></h1>
         </div>
-        <div class="resource-url"><%= aResource.url %></div>
-=======
-        <div class="resource-title"><h1><%= aResource.title %></h1></div>
         <div class="resource-url"><a href=<%= aResource.url %>><%= aResource.url %></a></div>
->>>>>>> 559ed248853444b56fe5e5593a8bd24fca62eb40
         <div class="resource-description"><%= aResource.description %></div>
         <div class="resource-embedded"><img src=<%= aResource.image_url %>></div>
         <div class="resource-footer">topic</div>
@@ -28,17 +23,13 @@
 
       <div id="review-section">
 
-<<<<<<< HEAD
         <div id="review-header">
-          <h3>leave your review</h3>
+          <h3></h3>
         </div>
-=======
-        <div id="review-header"><h3></h3></div>
->>>>>>> 410e902dc1c409548c184084e36e5553b5897ac2
 
         <form method="POST" , action="/resources/<%= id %>/reviews" id="review-contents">
           <textarea class="review-component" id="reivew-comment" placeholder="leave your review"></textarea>
-          <button class="review-component" id="like-resource" type="submit">LIKE</button>
+          <button class="review-component" id="like-resource" type="submit" value="false">LIKE</button>
           <select name="myselect" id="myselect">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -48,7 +39,7 @@
           </select>
 
           <!-- <div class="review-component" id="review-rating">rating: __ out of 5 ~</div> -->
-          <button class="review-component" id="submit-review" type="submit">submit review</button>
+          <button class="review-component" id="submit-review" type="submit" vaue>submit review</button>
         </form>
 
         <!-- <form action="/resources/<%= id %>/reviews" method="POST">
@@ -62,7 +53,6 @@
       </div>
 
       <script>
-<<<<<<< HEAD
         /*
                     const loadReviews = function() {
 
@@ -80,27 +70,7 @@
                     }
         */
         //$(document).ready(loadReviews);
-        $(document).ready(() => loadReviews(<%= id %>));
-=======
-/*
-            const loadReviews = function() {
-
-            $.ajax({
-              url: '/api/resources/<%= id %>/reviews',
-              method: 'GET',
-              dataType: 'JSON',
-              //data: {id: req.params.id}
-            })
-            .then(result => {
-              console.log('inside loadReviews. then')
-              $("#past-reviews-container").empty();
-              renderReviews(result)})
-              .catch(err => console.log(err.message))
-            }
-*/
-            //$(document).ready(loadReviews);
-            $(document).ready(() => loadReviews('<%= id %>'));
->>>>>>> 559ed248853444b56fe5e5593a8bd24fca62eb40
+        $(document).ready(() => loadReviews('<%= id %>'));
       </script>
 
 

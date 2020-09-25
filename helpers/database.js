@@ -177,16 +177,16 @@ module.exports = db => {
       .catch(err => err.message);
   }
 
-  const getRating = function (reviewID, resourceID) {
+  const getLike = function (reviewID, resourceID) {
     const queryStr = {
-      text: `SELECT reviews.* FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND  reviews.resource_id = $2;`,
+      text: `SELECT reviews.liked FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND  reviews.resource_id = $2;`,
       values: [reviewID, resourceID]
     }
     return db
       .query(queryStr)
       .then(res => {
         // console.log(res.rows);
-        return res.rows
+        return res.rows[0]
       })
       .catch(err => err.message);
   }
@@ -206,6 +206,7 @@ module.exports = db => {
     getQueryResource,
     addResourceTopic,
     getAllReviews,
-    getResourceIDReviewID
+    getResourceIDReviewID,
+    getLike
   }
 }
