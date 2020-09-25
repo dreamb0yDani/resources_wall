@@ -20,7 +20,7 @@
 
 
       </div>
-
+      <% if (user) { %>
       <div id="review-section">
 
         <div id="review-header">
@@ -44,6 +44,7 @@
 
           <button class="review-component" id="submit-review" type="submit" vaue>submit review</button>
         </form>
+        <% } %>
 
         <!-- <form action="/resources/<%= id %>/reviews" method="POST">
 
