@@ -121,7 +121,7 @@ module.exports = db => {
     const queryStr = {
       text: `INSERT INTO reviews (comment, liked, rating, user_id, resource_id)
       VALUES($1, $2, $3, $4, $5)`,
-      values: [review.comment, review.liked, review.rating, currentUser, resourceID]
+      values: [review.comment, review['rating-value'], review.rating, currentUser, resourceID]
     }
 
     return db

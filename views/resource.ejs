@@ -21,7 +21,7 @@
 
 
       </div>
-
+      <% if (user) { %>
       <div id="review-section">
 
         <div id="review-header">
@@ -40,11 +40,16 @@
             <option value="5">5</option>
           </select>
 
+<<<<<<< HEAD
           <input type="text" name="rating-value" value="false"/>
+=======
+          <input type="text" name="rating-value" value="false" id="like-field"/>
+>>>>>>> 5cdb502a27e0fb9db8a65321fdbf3651066792c3
           <button type="button" value="false" id="like">Like</button>
 
           <button class="review-component" id="submit-review" type="submit" vaue>submit review</button>
         </form>
+        <% } %>
 
         <!-- <form action="/resources/<%= id %>/reviews" method="POST">
 
