@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic }) => {
+module.exports = ({ getAllResources, addResource, myResources, getResourceByID, addResourceReview, getQueryResource, getAllReviews, addResourceTopic, getResourceIDReviewID }) => {
 
   router.get("/api/resources/", (req, res) => {
 
@@ -33,12 +33,47 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     }
   });
 
-  router.get("/api/resources/:id/", (req, res) => {
+  router.get("/api/resources/:id", (req, res) => {
+
+    const resourceID = req.params.id;
+    console.log(resourceID, "check")
+
+    getResourceByID(resourceID)
+      .then(reviewsList => {
+        res.json(reviewsList)
+      })
+      .catch(err => err.message)
+  })
+
+  router.get("/api/resources/:id/reviews", (req, res) => {
 
     const resourceID = req.params.id;
     console.log(resourceID, "check")
 
     getAllReviews(resourceID)
+      .then(reviewsList => {
+        res.json(reviewsList)
+      })
+      .catch(err => err.message)
+  })
+
+  router.get("/api/resources/:id/reviews/:r_Id", (req, res) => {
+
+    const { id, r_Id } = req.params;
+    console.log(req.params)
+
+    getResourceIDReviewID(r_Id, id)
+      .then(reviewsList => {
+        res.json(reviewsList)
+      })
+      .catch(err => err.message)
+  })
+
+  router.get("/api/resources/:id/reviews/:r_Id/rating", (req, res) => {
+
+    const { id, r_Id } = req.params;
+
+    getResourceIDReviewID(r_Id, id)
       .then(reviewsList => {
         res.json(reviewsList)
       })
@@ -113,11 +148,12 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
     // posting the reviews for a specific resource
     // form with textarea, button and rating.
 
-    const review = req.body; // .comment, .liked, .rating
-    console.log(review)
+    //   const review = req.body; // .comment, .liked, .rating
+    //   console.log(review)
     const currentUser = req.session.user_id;
     const resourceID = req.params.id;
 
+    console.log(req.body)
     addResourceReview(review, currentUser, resourceID)
       .then(res => {
         res.redirect("/resources/:id")
