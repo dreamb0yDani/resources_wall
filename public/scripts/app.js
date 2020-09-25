@@ -37,9 +37,9 @@ const createReviewElement = review => {
     let $review = `
     <article class="single-review">
 
-      <div class="single-review-component">user ${review.user_id} says:</div>
+      <div class="single-review-component">${review.name} says:</div>
       <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
-      <div class="single-review-component"><p>user ${review.user_id} liked your resource!</p></div>
+      <div class="single-review-component"><p>${review.name} liked your resource!</p></div>
       <div class="single-review-component"><p>rating: ${review.rating}</p></div>
 
     </article>
@@ -51,7 +51,7 @@ const createReviewElement = review => {
     let $review = `
     <article class="single-review">
 
-      <div class="single-review-component">user ${review.user_id} says:</div>
+      <div class="single-review-component">${review.name} says:</div>
       <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
       <div class="single-review-component"><p></p></div>
       <div class="single-review-component"><p>rating: ${review.rating}</p></div>

@@ -161,16 +161,13 @@ module.exports = db => {
   }
 
   const getAllReviews = function (resourceID) {
-    //console.log('BBBBBBB');
-    //console.log('inside getAllReiviews function; resourceID is ---', resourceID);
     const queryStr = {
-      text: `SELECT reviews.* FROM reviews WHERE reviews.resource_id = $1;`,
+      text: `SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE reviews.resource_id = $1;`,
       values: [resourceID]
     }
     return db
       .query(queryStr)
       .then(res => {
-        //console.log(res.rows);
         return res.rows
       })
       .catch(err => err.message);
