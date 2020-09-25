@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #99996620;
+  //background-color: #99996660;
   //background-color: #bdcebe40;
   padding: 0 2rem;
   color:  #244751;
@@ -80,3 +80,13 @@
     }
   }
 
+  @media only screen and (max-width: 1024px) {
+
+    .nav-logo {
+       h4 {
+        display: none;
+      }
+    }
+
+
+  }

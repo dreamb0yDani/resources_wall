@@ -130,7 +130,7 @@ $(document).ready(() => {
   $("#like").on("click", function () {
     if (inputVal.val() === String(false)) {
       inputVal.val("true");
-      input.innerText = "Unlke"
+      input.innerText = "Unlike"
     } else {
       inputVal.val("false");
       input.innerText = "Like"

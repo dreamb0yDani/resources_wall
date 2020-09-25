@@ -113,6 +113,7 @@ body {
     margin: 2em 21em auto 21em;
     font-size: 1em;
     color:#215361;
+    margin-bottom: 2em;
 
 
     textarea{
@@ -208,11 +209,23 @@ body {
     color: #215361;
 
 
-
-
-
-
-
   }
 
+}
+
+
+@media only screen and (max-width: 1024px) {
+  #fill-in-form {
+    max-width: 400px;
+    height: auto;
+
+    padding-left:50px;
+    padding-right:10px;
+    padding-top:30px;
+    padding-bottom:20px;
+
+    textarea{
+      //margin-bottom: none;
+    }
+  }
 }
