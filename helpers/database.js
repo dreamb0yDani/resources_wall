@@ -91,10 +91,10 @@ module.exports = db => {
 
   const addResource = function (resource, currentUser) {
     const queryStr = {
-      text: `INSERT INTO resources (title, url, description, user_id, category_id)
-      VALUES($1, $2, $3, $4, $5)
+      text: `INSERT INTO resources (title, url, description, image_url, user_id, category_id)
+      VALUES($1, $2, $3, $4, $5, $6)
       RETURNING *;`,
-      values: [resource.title, resource.url, resource.description, currentUser, resource.category]
+      values: [resource.title, resource.url, resource.description, resource.image, currentUser, resource.category]
     }
 
     return db

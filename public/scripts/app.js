@@ -11,7 +11,7 @@ const createContentElement = content => {
   <article class="content">
         <header>
           <h2><a href="/resources/<%= resource.id %>"">${content.title}</a></h2>
-          <embed src=${content.url} type="text/html">
+          <img src=${content.image_url}>
           <p>${content.description}</p>
         </header>
       </article>`
@@ -24,7 +24,9 @@ const renderReviews = (reviewsList) => {
   //$("#past-reviews-container").empty();
 
   for (const reviewObj of reviewsList) {
+    if(reviewObj.comment) {
     $("#past-reviews-container").append(createReviewElement(reviewObj));
+    }
   }
 
 }
@@ -35,10 +37,10 @@ const createReviewElement = review => {
     let $review = `
     <article class="single-review">
 
-      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component">user ${review.user_id} says:</div>
       <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
-      <div class="single-review-component">user ${review.user_id} liked your resource!</div>
-      <div class="single-review-component">${review.rating}</div>
+      <div class="single-review-component"><p>user ${review.user_id} liked your resource!</p></div>
+      <div class="single-review-component"><p>rating: ${review.rating}</p></div>
 
     </article>
     `
@@ -49,10 +51,10 @@ const createReviewElement = review => {
     let $review = `
     <article class="single-review">
 
-      <div class="single-review-component">user ${review.user_id} says</div>
+      <div class="single-review-component">user ${review.user_id} says:</div>
       <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
-      <div class="single-review-component"></div>
-      <div class="single-review-component">${review.rating}</div>
+      <div class="single-review-component"><p></p></div>
+      <div class="single-review-component"><p>rating: ${review.rating}</p></div>
 
     </article>
     `

@@ -15,9 +15,13 @@
 
 <body>
   <div class="top-nav">
+
     <div class="nav-logo">
       <h1><a href="/resources">Resource Wall</a></h1>
+      <% if (user) { %>
       <h4>share and inspire.</h4>
+      <% } %>
+
     </div>
 
     <input type="search" placeholder="Search">
