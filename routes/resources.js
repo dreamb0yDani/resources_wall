@@ -129,38 +129,38 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
       .catch(e => res.send(e));
   });
 
+
   router.get("/resources/:id", (req, res) => {
     // accessa specific resources
     const resourceID = req.params.id;
 
     getResourceByID(resourceID)
-      .then(data => {
-        const resource = data;
-        const templateVars = {
-          aResource: resource,
-          user: req.session.user_id,
-          id: req.params.id
-        }
-        res.render('resource', templateVars);
-      })
-      .catch(e => res.send(e));
+    .then(data => {
+      const resource = data;
+      const templateVars = {
+        aResource: resource,
+        user: req.session.user_id,
+        id: req.params.id
+      }
+      res.render('resource', templateVars);
+    })
+    .catch(e => res.send(e));
   });
 
   router.post("/resources/:id/reviews", (req, res) => {
-    // posting the reviews for a specific resource
-    // form with textarea, button and rating.
 
-    //   const review = req.body; // .comment, .liked, .rating
-    //   console.log(review)
     const currentUser = req.session.user_id;
     const resourceID = req.params.id;
+    let review = req.body;
+    review.rating = parseInt(review.rating);
 
-    console.log(req.body)
-    addResourceReview(review, currentUser, resourceID)
-      .then(res => {
-        res.redirect("/resources/:id")
-      })
-      .catch(e => res.send(e));
+    if (!review.liked) {
+      review.liked = false;
+    }
+
+    addResourceReview(review, currentUser, resourceID);
+
+    res.redirect(`/resources/${resourceID}`);
 
   });
 

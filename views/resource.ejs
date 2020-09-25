@@ -28,9 +28,10 @@
         </div>
 
         <form method="POST" , action="/resources/<%= id %>/reviews" id="review-contents">
-          <textarea class="review-component" id="reivew-comment" placeholder="leave your review"></textarea>
-          <button class="review-component" id="like-resource" type="submit" value="false">LIKE</button>
-          <select name="myselect" id="myselect">
+          <textarea name="comment" class="review-component" id="reivew-comment"
+            placeholder="leave your review"></textarea>
+          <button name="liked" class="review-component" id="like-resource" type="submit">LIKE</button>
+          <select name="rating" id="myselect">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
