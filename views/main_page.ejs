@@ -41,13 +41,14 @@
 
         <div id="content-container">
           <% for(const resource of resourceList) { %>
-          <article class="content">
+          <div class="content fill">
+            <img src=<%= resource.image_url %>>
             <header>
               <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-              <img src=<%= resource.image_url %>>
-                  <p><%= resource.description %></p>
+
+              <p><%= resource.description %></p>
             </header>
-          </article>
+          </div>
           <% } %>
         </div>
 

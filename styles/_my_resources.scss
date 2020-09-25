@@ -34,7 +34,14 @@
           border: 2px solid #215361;
           border-radius: 20px;
           text-decoration: none;
+          color: black;
 
+          &:hover {
+
+            background: #bbab9b;
+            border: none;
+
+          }
        }
       }
 
