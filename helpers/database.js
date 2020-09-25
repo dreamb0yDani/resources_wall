@@ -58,7 +58,7 @@ module.exports = db => {
   //------------------------------------------------------------------------------
 
   const getAllResources = function () {
-    return db.query(`SELECT * FROM resources;`)
+    return db.query(`SELECT * FROM resources ORDER BY id DESC;`)
       .then(res => res.rows);
   }
 

@@ -48,7 +48,7 @@
 
     #review-section {
 
-      height: 20vh;
+      height: 30vh;
         width: 70%;
         margin-top: 2em;
         display: flex;
@@ -58,7 +58,7 @@
 
         form {
           height: 50%;
-          //width: 90%;
+          width: 90%;
           display: grid;
           //flex: 1;
           grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -114,3 +114,17 @@
 
 }
 
+@media only screen and (max-width: 1024px) {
+
+  #like > span, #submit-review>span {
+    font-size: smaller;
+  }
+
+  .review-component {
+    &:nth-child(5) {
+    grid-column: 3/5;
+    margin: none;
+    padding: none;
+    }
+  }
+}

@@ -139,7 +139,7 @@ $(document).ready(() => {
   });
 
 })
-
+/*
 const loadReviews = function (id) {
 
   $.ajax({
@@ -154,7 +154,7 @@ const loadReviews = function (id) {
     })
     .catch(err => console.log(err.message))
 }
-
+*/
 
 
 const renderLikedResources = (likedResourcesList) => {
