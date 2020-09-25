@@ -77,13 +77,14 @@ module.exports = db => {
 
   const myLikedResources = function (currentUser) {
     const queryStr = {
-      text: `SELECT * FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.user_id = $1 AND liked = true`,
+      text: `SELECT * FROM resources JOIN resources ON reviews.resource_id = resources.id WHERE reviews.user_id = $1 AND liked = true`,
       values: [currentUser]
     }
 
     return db
       .query(queryStr)
       .then(res => {
+        console.log(res.rows)
         return res.rows
       })
   }

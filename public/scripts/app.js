@@ -140,6 +140,63 @@ $(document).ready(() => {
 
 })
 
+const loadLikedResource = function (id) {
+
+  $.ajax({
+    url: `/api/resources/${id}/reviews`,
+    method: 'GET',
+    dataType: 'JSON',
+    //data: {id: req.params.id}
+  })
+    .then(result => {
+      $("#past-reviews-container").empty();
+      renderReviews(result)
+    })
+    .catch(err => console.log(err.message))
+}
 
 
 
+const renderLikedResources = (likedResourcesList) => {
+
+  //$("#past-reviews-container").empty();
+
+  for (const likedResourceObj of reviewsList) {
+
+      $("#my-liked-resources-container").append(createLikedResourceElement(likedResourceObj));
+
+  }
+
+}
+
+const createLikedResourceElement = likedResource => {
+
+  if (likedResource.liked) {
+    let $likedResource = `
+      <a href="/resources/<%= resource.id %>" class="single-liked-resource">
+                <div class='resource-title'><%= resource.title %></div>
+                <!-- <div class='resource-url'><%= resource.url %></div> -->
+                <div class='resource-description'><%= resource.description %></div>
+      </a>
+    `
+    return $likedResource
+
+  /*}
+  else {
+
+    let $review = `
+    <article class="single-review">
+
+      <div class="single-review-component">user ${review.user_id} says:</div>
+      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
+      <div class="single-review-component"><p></p></div>
+      <div class="single-review-component"><p>rating: ${review.rating}</p></div>
+
+    </article>
+    `
+    return $review;
+    */
+
+  }
+
+}

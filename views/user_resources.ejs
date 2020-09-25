@@ -11,31 +11,41 @@
       <div id="my-resources-container">
 
         <section id="all-my-resources">
+
           <div><h3>collection</h3></div>
-          <% for(const resource of resourceList) { %>
-          <a href="/resources/<%= resource.id %>" class="my-single-resource">
-            <div class='resource-title'><%= resource.title %></div>
-            <!--<div class='resource-url'><%= resource.url %></div>-->
-            <div class='resource-description'><%= resource.description %></div>
 
-          </a>
+          <div id="all-my-resources-container">
+              <% for(const resource of resourceList) { %>
+              <a href="/resources/<%= resource.id %>" class="my-single-resource">
+                <div class='resource-title'><%= resource.title %></div>
+                <!--<div class='resource-url'><%= resource.url %></div>-->
+                <div class='resource-description'><%= resource.description %></div>
 
-          <% } %>
+              </a>
+
+              <% } %>
+          </div>
+
         </section>
 
         <section id="my-liked-resources">
-          <div><h3>liked by me</h3></div>
-          <!-- this part should be get reviews ORDERED BY #of likes in DESC order-->
-          <!--using the same templateVars as above as placeholder-->
 
-          <% for(const resource of resourceList) { %>
-            <a href="/resources/<%= resource.id %>" class="single-liked-resource">
-              <div class='resource-title'><%= resource.title %></div>
-              <!-- <div class='resource-url'><%= resource.url %></div> -->
-              <div class='resource-description'><%= resource.description %></div>
-            </a>
-          <% } %>
+            <div><h3>liked by me</h3></div>
 
+            <div id="my-liked-resources-container">
+
+              <!-- this part should be get reviews ORDERED BY #of likes in DESC order-->
+              <!--using the same templateVars as above as placeholder-->
+
+              <% for(const resource of resourceList) { %>
+              <a href="/resources/<%= resource.id %>" class="single-liked-resource">
+                <div class='resource-title'><%= resource.title %></div>
+                <!-- <div class='resource-url'><%= resource.url %></div> -->
+                <div class='resource-description'><%= resource.description %></div>
+              </a>
+              <% } %>
+
+            </div>
         </section>
 
     </div>
