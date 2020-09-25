@@ -10,9 +10,9 @@
       <div id="resource-section">
 
         <div class="resource-title"><h1><%= aResource.title %></h1></div>
-        <div class="resource-url"><%= aResource.url %></div>
+        <div class="resource-url"><a href=<%= aResource.url %>><%= aResource.url %></a></div>
         <div class="resource-description"><%= aResource.description %></div>
-        <div class="resource-embedded">EMBEDDED CONTENT! </div>
+        <div class="resource-embedded"><img src=<%= aResource.image_url %>></div>
         <div class="resource-footer">topic</div>
 
 
@@ -54,7 +54,7 @@
             }
 */
             //$(document).ready(loadReviews);
-            $(document).ready(() => loadReviews(<%= id %>));
+            $(document).ready(() => loadReviews('<%= id %>'));
       </script>
 
 
