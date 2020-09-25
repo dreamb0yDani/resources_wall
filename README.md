@@ -1,12 +1,12 @@
 # Resource Wall
 
-Resource Wall is a multi-page app that allow learners to save learning resources like tutorials, blogs and videos in a central place that is publicly available to any user. Users can view resources that have been contributed by other users and can discuss, rate and like these resources accordingly, with the goal of fostering and encouraging meaningful discourse to promote the pursuit of knowledge and learning.
+Resource Wall is a multi-page app that allows learners to save learning resources like tutorials, blogs and videos in a central place that is publicly available to any user. Users can view resources that have been contributed by other users and can review these resources accordingly.
 
 ## Final Product
 
-![""]()
-![""]()
-![""]()
+!["Screenshot of form submission"]()
+!["Screenshot of home page"]()
+!["Screenshot of reviews page"]()
 
 ## Dependencies
 
