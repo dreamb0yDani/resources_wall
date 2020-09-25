@@ -158,8 +158,7 @@ module.exports = ({ getAllResources, addResource, myResources, getResourceByID, 
 
     addResourceReview(review, currentUser, resourceID);
 
-    // res.redirect("/resources/:id");
-    res.redirect("/resources");
+    res.redirect(`/resources/${resourceID}`);
 
   });
 
