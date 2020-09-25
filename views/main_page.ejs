@@ -10,16 +10,9 @@
       <textarea form="new_resource_form" name="url" type="url" id="new_resource_url"
         placeholder="http://www.example.com" required></textarea>
       <textarea form="new_resource_form" name="title" id="new_resource_title" placeholder="title" required></textarea>
-<<<<<<< HEAD
-      <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"
-        required></textarea>
-      <textarea form='new_resource_form' name="topic" id="new_resource_topic"
-        placeholder="Resource topic (javascript, etc.)"></textarea>
-=======
       <textarea form="new_resource_form" name="description" id="new_resource_description" placeholder="description"required></textarea>
       <textarea form="new_resource_form" name="image" id="new_resource_image" placeholder="provide an image link that represents your content" required></textarea>
       <textarea form='new_resource_form' name="topic" id="new_resource_topic" placeholder="Resource topic (javascript, etc.)"></textarea>
->>>>>>> 410e902dc1c409548c184084e36e5553b5897ac2
 
       <label for="resource_category">category: </label>
       <select form="new_resource_form" name='category' id='resource_category' required>
@@ -34,13 +27,8 @@
     <% } %>
 
 
-<<<<<<< HEAD
-    <section id="main-wall">
-
-=======
   <section id="main-wall">
 <!--
->>>>>>> 410e902dc1c409548c184084e36e5553b5897ac2
       <div id="category-icons">
 
 
@@ -48,26 +36,16 @@
         <div class="category">articles</div>
         <div class="category">videos</div>
         <div class="category">tutorials</div>
-<<<<<<< HEAD
-      </div>
-
-      <div id="content-background">
-=======
     </div>
 -->
     <div id="content-background">
->>>>>>> 410e902dc1c409548c184084e36e5553b5897ac2
 
         <div id="content-container">
           <% for(const resource of resourceList) { %>
           <article class="content">
             <header>
               <h2><a href="/resources/<%= resource.id %>""><%= resource.title %></a></h2>
-<<<<<<< HEAD
-              <embed src=<%= resource.url %> type=" video/webm">
-=======
               <img src=<%= resource.image_url %>>
->>>>>>> 410e902dc1c409548c184084e36e5553b5897ac2
                   <p><%= resource.description %></p>
             </header>
           </article>
