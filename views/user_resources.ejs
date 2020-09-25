@@ -13,9 +13,9 @@
         <section id="all-my-resources">
           <div><h3>collection</h3></div>
           <% for(const resource of resourceList) { %>
-          <a href="/resources/<%= resource.id %>" class="my-single-resource">
-            <div class='resource-title'><%= resource.title %></div>
-            <!--<div class='resource-url'><%= resource.url %></div>-->
+          <div class="my-single-resource">
+            <div class='resource-title'><a href="/resources/<%= resource.id %>""><%= resource.title %></a></div>
+            <!-- <div class='resource-url'><%= resource.url %></div> -->
             <div class='resource-description'><%= resource.description %></div>
 
           </a>
@@ -29,8 +29,8 @@
           <!--using the same templateVars as above as placeholder-->
 
           <% for(const resource of resourceList) { %>
-            <a href="/resources/<%= resource.id %>" class="single-liked-resource">
-              <div class='resource-title'><%= resource.title %></div>
+            <div class="single-liked-resource">
+              <div class='resource-title'><a href="/resources/<%= resource.id %>""><%= resource.title %></a></div>
               <!-- <div class='resource-url'><%= resource.url %></div> -->
               <div class='resource-description'><%= resource.description %></div>
             </a>
