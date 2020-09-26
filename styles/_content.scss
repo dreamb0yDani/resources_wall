@@ -1,33 +1,7 @@
-/*
-.main-container {
-  #content-container {
-    margin: 0 2rem;
-      article.content {
-        border: 2px solid #545149;
-        margin: 35px 0;
-        padding: 0 15px;
-        transition: box-shadow 0.5s;
-      &:hover {
-        box-shadow: 0 0 3px 3px #8082ee;
-      }
-    }
-  }
-}
-main-container #content-container {
-  margin: 0 2rem;
-}
-
-.main-container #content-container article.content {
-  border: 2px solid #545149;
-  margin: 35px 0;
-  padding: 0 15px;
-  transition: box-shadow 0.5s;
-}
-*/
 #main-wall {
-  //background:#b2b2b250;
-   //#bdcebe40;
+
    margin-top: 2em;
+
    #category-icons {
 
     display: flex;
@@ -40,14 +14,13 @@ main-container #content-container {
     margin: 4em 2em 0 2em;
 
     #filter-by {
-      //margin-top: 0.5em;
+
       margin: auto 1em auto 1em;
       padding: 0.5em;
     }
-    //text-color:
 
     .category {
-      //height: 100%;;
+
       margin: auto 1em auto 1em;
       padding: 0.5em;
 
@@ -55,24 +28,20 @@ main-container #content-container {
     }
 
     .category:hover {
-      background-color: #99996680; // #bdcebe90;
+      background-color: #99996680;
     }
 
   }
 
   #content-background {
-    //width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    //background: #bbab9b65;
     margin-top: 1em;
-    //padding-top: 2em;
 
       #content-container {
 
-      //background:#b2b2b290;
         padding: 0;
         width: 85%;
         display: grid;
@@ -80,19 +49,13 @@ main-container #content-container {
         grid-template-columns: 25% 25% 25% 25%;
         grid-template-rows: auto;
         margin: 0 0 0 0;
-        //align-items: center;
         justify-content: center;
 
         .content {
-          //background: #b2b2b299;// #b2ad7f;// #b2b2b2;
-          //background:  #bdcebe;
-          //background: #99996680;
           border-radius: 7px;
           height: 100%;
           width: 100%;
-          //background: #e9e9e9;
           background-image: url(https://static.tumblr.com/maopbtg/nBUmgtogx/paper.png);
-          //background: #99996620;
 
 
           .title-description{
@@ -107,54 +70,35 @@ main-container #content-container {
 
           }
 
-          /*
-          article.fill
-            position:relative;
-            border:1px dashed red;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            overflow:hidden
- */
            img {
-            //object-fit: cover;
             margin-top: 2em;
             width: 100%;
-            //height: 100%;
-
-
-            //object-position: 50% 50%;
           }
 
           a {
             text-decoration: none;
             color:  #244751;
-
-            //background:
           }
 
           p {
 
             margin: 0;
-            //text-align: center;
           }
 
 
 
 
           &:hover {
-            //border: 3px solid #244751;
+
             box-shadow: 0 0 3px 3px #b2b2b270;
             background:   #999966;
-
-            //background:  antiquewhite;//#c5d5c5;// #bdcebe;
 
         }
       }
   }
 }
 }
-/*largedesktop style*/
+
 @media only screen and (max-width: 1024px) {
 
   #content-container {
@@ -167,7 +111,6 @@ main-container #content-container {
       grid-template-columns: 25% 25% 25% 25%;
       grid-template-rows: auto;
       margin: 0 0 0 0;
-      //align-items: center;
       justify-content: center;
 
       .content {
@@ -175,9 +118,7 @@ main-container #content-container {
         border-radius: 7px;
         height: 100%;
         width: 100%;
-        //background: #e9e9e9;
         background-image: url(https://static.tumblr.com/maopbtg/nBUmgtogx/paper.png);
-        //background: #99996620;
 
 
         .title-description{
@@ -186,32 +127,17 @@ main-container #content-container {
 
         }
 
-        /*
-        article.fill
-          position:relative;
-          border:1px dashed red;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          overflow:hidden
-*/
+
          img {
-          //object-fit: cover;
-          //margin-top: 2em;
-          //width: 100%;
-          //height: 100%;
+
           max-width: 100%;
           height: auto;
-
-
-          //object-position: 50% 50%;
         }
 
         a {
           text-decoration: none;
           color:  #244751;
 
-          //background:
         }
 
         p {
@@ -223,11 +149,10 @@ main-container #content-container {
 
 
         &:hover {
-          //border: 3px solid #244751;
+
           box-shadow: 0 0 3px 3px #b2b2b270;
           background:   #999966;
 
-          //background:  antiquewhite;//#c5d5c5;// #bdcebe;
 
       }
     }

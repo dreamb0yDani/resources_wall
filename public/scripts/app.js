@@ -21,6 +21,7 @@ const createContentElement = content => {
   return $content
 }
 //------------------------------------------------------------------------------
+//render reviews on the resource page
 const renderReviews = (reviewsList) => {
 
   for (const reviewObj of reviewsList) {
@@ -64,13 +65,13 @@ const createReviewElement = review => {
 
 }
 //------------------------------------------------------------------------------
+//load reviews on the resource page
 const loadReviews = function (id) {
 
   $.ajax({
     url: `/api/resources/${id}/reviews`,
     method: 'GET',
-    dataType: 'JSON',
-    //data: {id: req.params.id}
+    dataType: 'JSON'
   })
     .then(result => {
       $("#past-reviews-container").empty();
@@ -100,26 +101,6 @@ $(document).ready(() => {
     })
   })
 
-  //loadReviews();
-
-  /*
-  $(window).scroll(function() {
-
-    $.fn.scrollBottom = function() {
-      return $(document).height() - this.scrollTop() - this.height();
-    };
-
-    if($(window).scrollBottom() == $(document).height() - $(window).height()) {
-
-      $.ajax({
-        url: `/resources/:id/reviews`,
-        method: 'GET',
-        dataType: 'JSON'
-      })
-      .then(result => renderReviews(result))
-      .catch(err => console.log(err.message))
-    }
-    */
 
   const inputVal = $("input[name='rating-value']");
   const input = document.getElementById("like");
@@ -136,22 +117,7 @@ $(document).ready(() => {
   });
 
 })
-/*
-const loadReviews = function (id) {
 
-  $.ajax({
-    url: `/api/resources/${id}/reviews`,
-    method: 'GET',
-    dataType: 'JSON',
-    //data: {id: req.params.id}
-  })
-    .then(result => {
-      $("#past-reviews-container").empty();
-      renderReviews(result)
-    })
-    .catch(err => console.log(err.message))
-}
-*/
 //------------------------------------------------------------------------------
 const renderLikedResources = (likedResourcesList) => {
 
@@ -177,24 +143,7 @@ const createLikedResourceElement = likedResource => {
     `
     return $likedResource
 
-  /*}
-  else {
-
-    let $review = `
-    <article class="single-review">
-
-      <div class="single-review-component">user ${review.user_id} says:</div>
-      <div class="single-review-component single-review-comment"><p>${review.comment}</p></div>
-      <div class="single-review-component"><p></p></div>
-      <div class="single-review-component"><p>rating: ${review.rating}</p></div>
-
-    </article>
-    `
-    return $review;
-    */
-
   }
 
 }
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
+

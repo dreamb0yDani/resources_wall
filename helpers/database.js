@@ -174,7 +174,7 @@ module.exports = db => {
   //------------------------------------------------------------------------------
   const getLike = function (reviewID, resourceID) {
     const queryStr = {
-      text: `SELECT reviews.liked FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND  reviews.resource_id = $2;`,
+      text: `SELECT reviews.liked FROM reviews JOIN resources ON reviews.resource_id = resources.id WHERE reviews.id = $1 AND reviews.resource_id = $2;`,
       values: [reviewID, resourceID]
     }
     return db

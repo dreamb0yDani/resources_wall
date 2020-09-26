@@ -2,8 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  //background-color: #99996660;
-  //background-color: #bdcebe40;
   padding: 0 2rem;
   color:  #244751;
 
@@ -52,7 +50,7 @@
 
         &:hover {
           color: white;
-          background-color: #99996680; // #b2b2b270;
+          background-color: #99996680;
           border-radius: 10px;
         }
         a {
