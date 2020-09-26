@@ -47,10 +47,6 @@
         </form>
         <% } %>
 
-        <!-- <form action="/resources/<%= id %>/reviews" method="POST">
-
-        </form> -->
-
       </div>
 
       <div id="past-reviews-container">
@@ -58,26 +54,8 @@
       </div>
 
       <script>
-        /*
-                    const loadReviews = function() {
-
-                    $.ajax({
-                      url: '/api/resources/<%= id %>/reviews',
-                      method: 'GET',
-                      dataType: 'JSON',
-                      //data: {id: req.params.id}
-                    })
-                    .then(result => {
-                      console.log('inside loadReviews. then')
-                      $("#past-reviews-container").empty();
-                      renderReviews(result)})
-                      .catch(err => console.log(err.message))
-                    }
-        */
-        //$(document).ready(loadReviews);
         $(document).ready(() => loadReviews('<%= id %>'));
       </script>
-
 
     </section>
   </main>

@@ -1,41 +1,23 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
+//------------------------------------------------------------------------------
 const bcrypt = require('bcrypt')
 const express = require('express');
 const router = express.Router();
-
-
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// User Route Exports
+//------------------------------------------------------------------------------
 module.exports = ({ addUser,
   getUserByEmail,
   getUserByID,
   updateUserName,
   updateUserEmail,
   updateUserPassword }) => {
-  // router.get("/api/users", (req, res) => {
-
-  //   db.query(`SELECT * FROM users;`)
-  //     .then(data => {
-  //       const users = data.rows;
-  //       console.log(users)
-  //       res.json({ users });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     })
-  // });
-
-  // register route for the user
+  //------------------------------------------------------------------------------
   router.get("/register", (req, res) => {
 
     req.session.user_id ? res.redirect('/resources') : res.render('registration_page', { user: req.session.user_id });
   });
-
+  //------------------------------------------------------------------------------
   router.post("/register", (req, res) => {
 
     const user = req.body;
@@ -59,12 +41,11 @@ module.exports = ({ addUser,
         }
       })
   })
-
-
+  //------------------------------------------------------------------------------
   router.get("/login", (req, res) => {
     req.session.user_id ? res.redirect('/resources') : res.render('login_form', { user: req.session.user_id });
   });
-
+  //------------------------------------------------------------------------------
   router.post("/login", (req, res) => {
     // check iif any of the field is empty
     const { email, password } = req.body;
@@ -97,15 +78,12 @@ module.exports = ({ addUser,
         }
       })
   })
-
+  //------------------------------------------------------------------------------
   router.post("/logout", (req, res) => {
     req.session = null;
     res.redirect("/resources");
   });
-
-
-
-
+  //------------------------------------------------------------------------------
   router.get("/users/:id", (req, res) => {
     // take you to the user profile
     if (!req.session.user_id) {
@@ -123,8 +101,7 @@ module.exports = ({ addUser,
       })
       .catch(err => res.send(err.message));
   });
-
-
+  //------------------------------------------------------------------------------
   router.post("/users/:id", (req, res) => {
     // submits information to the db to update user info
     const user = req.session.user_id
@@ -171,7 +148,8 @@ module.exports = ({ addUser,
     res.render("../views/user_profile", { user: req.session.user_id })
 
   });
-
-
+  //------------------------------------------------------------------------------
   return router;
 };
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------

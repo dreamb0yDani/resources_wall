@@ -1,11 +1,13 @@
+//------------------------------------------------------------------------------
+// Client Side Rendering
+//------------------------------------------------------------------------------
 const renderContent = (contents) => {
   $("#content-container").empty();
   for (const element of contents) {
-    // console.log(conteelement)
     $("#content-container").prepend(createContentElement(element))
   }
 }
-
+//------------------------------------------------------------------------------
 const createContentElement = content => {
   let $content = `
   <article class="content">
@@ -18,10 +20,8 @@ const createContentElement = content => {
 
   return $content
 }
-
+//------------------------------------------------------------------------------
 const renderReviews = (reviewsList) => {
-
-  //$("#past-reviews-container").empty();
 
   for (const reviewObj of reviewsList) {
     if (reviewObj.comment) {
@@ -30,7 +30,7 @@ const renderReviews = (reviewsList) => {
   }
 
 }
-
+//------------------------------------------------------------------------------
 const createReviewElement = review => {
 
   if (review.liked) {
@@ -63,7 +63,7 @@ const createReviewElement = review => {
   }
 
 }
-
+//------------------------------------------------------------------------------
 const loadReviews = function (id) {
 
   $.ajax({
@@ -78,11 +78,8 @@ const loadReviews = function (id) {
     })
     .catch(err => console.log(err.message))
 }
-
-
-
+//------------------------------------------------------------------------------
 $(document).ready(() => {
-  console.log('Ready')
 
   $(() => {
     const searchBox = $("input[type='search']")
@@ -155,8 +152,7 @@ const loadReviews = function (id) {
     .catch(err => console.log(err.message))
 }
 */
-
-
+//------------------------------------------------------------------------------
 const renderLikedResources = (likedResourcesList) => {
 
   //$("#past-reviews-container").empty();
@@ -168,7 +164,7 @@ const renderLikedResources = (likedResourcesList) => {
   }
 
 }
-
+//------------------------------------------------------------------------------
 const createLikedResourceElement = likedResource => {
 
   if (likedResource.liked) {
@@ -200,3 +196,5 @@ const createLikedResourceElement = likedResource => {
   }
 
 }
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
